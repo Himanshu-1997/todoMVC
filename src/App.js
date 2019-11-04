@@ -102,11 +102,12 @@ function App() {
   return (
     <div className="App">
       <h1 className='title'>todos</h1>
-      <div className='top'>
+      <div className='shadow'>
       <div className='header'>
         <button className='drop' onClick={() => handleAllCompleted()}>&#9660;</button>
         <input id='todo' autoComplete='off' type='text' placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
       </div>
+      <div className='top'>
       <div className='content'>
       {display===0 && <DisplayTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
       {display===1 && <DisplayActiveTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
@@ -123,7 +124,8 @@ function App() {
       {findNoofCompletedtodo()>0 && <button className='clr-comp' onClick={() => handleClearCompleted()}>Clear completed</button> }  
       </div>
   </div>} 
-  </div>     
+  </div> 
+  </div>    
     </div>
   );
 }
