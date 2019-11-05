@@ -415,11 +415,12 @@
   .ileft{
     display: flex;
     flex-direction: column;
-    flex-basis: 65%;
+    flex-basis: 75%;
   }
   .noItemsLeft{
     display: flex;
     align-self: start;
+    margin-left: 10px;
   }
   .three-btn{
     justify-content: flex-end;
@@ -431,8 +432,14 @@
   .clr-comp{
     padding:1;
     width:min-content;
+    align-self: self-start;
     white-space: nowrap;
     text-decoration-line: underline;
     text-decoration-style: dashed;
+    margin-top: 17px;
+  }
+  .drop{
+    width:13%;
+    font-size: 25px;
   }
 }
