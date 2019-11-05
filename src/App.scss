@@ -329,6 +329,9 @@
   flex-grow: 1;
   align-items: center;
 }
+.three-btn{
+  display: flex;
+}
 
 @media (max-width:650px){
   .footer{
@@ -367,12 +370,68 @@
     position: sticky;
     top:0;
     z-index: 5;
-    background:lightgray;
+    background:teal;
+    text-transform: uppercase;
+    color: white;
+    font-size: 40px;
+    letter-spacing: 10px;
   }
   .header{
     position: sticky;
-    top:140px;
+    top:45px;
     z-index: 5;
     background:lightgray;
+  }
+  .all-btn{
+    font-size: 12px;
+    border:0.5px dashed black;
+  }
+  .active-btn{
+    font-size: 12px;
+    border:0.5px dashed black;
+  }
+  .comp-btn{
+    font-size: 12px;
+    border:0.5px dashed black;
+  }
+  .all-btn.active{
+    border:0.5px dashed black;
+    background:teal;
+    color:white;
+    border-radius:0%;
+  }
+  .active-btn.active{
+      border:0.5px dashed black;
+      background:teal;
+    color:white;
+    border-radius:0%;
+  }
+  .comp-btn.active{
+    border:0.5px dashed black;
+    background:teal;
+    color:white;
+    border-radius:0%;
+  }
+  .ileft{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 65%;
+  }
+  .noItemsLeft{
+    display: flex;
+    align-self: start;
+  }
+  .three-btn{
+    justify-content: flex-end;
+  }
+  #todo::placeholder{
+    color: #dedede;
+  }
+  .clr-comp{
+    padding:1;
+    width:min-content;
+    white-space: nowrap;
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
   }
 }

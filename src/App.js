@@ -12,7 +12,7 @@ const FindChecked = (props) => {
       }
     }
     return (
-      <div>
+      <div className='noItemsLeft'>
           {props.data.length-c > 1 ?<p>{props.data.length-c} items left</p>:<p>{props.data.length-c} item left</p>}
         </div>
     );
@@ -103,29 +103,31 @@ function App() {
     <div className="App">
       <h1 className='title'>todos</h1>
       <div className='shadow'>
-      <div className='header'>
-        <button className='drop' onClick={() => handleAllCompleted()}>&#9660;</button>
-        <input id='todo' autoComplete='off' type='text' placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
-      </div>
-      <div className='top'>
-      <div className='content'>
-      {display===0 && <DisplayTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
-      {display===1 && <DisplayActiveTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
-      {display===2 && <DisplayCompletedTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
-      </div>
-      {todolist.length>0 && <div className='footer'>
-      <div className='btns'>
-      <div className='ileft'>
-      <FindChecked data={todolist}/>
-      {display===0?<button  className='all-btn active' onClick={() =>handleDisplay(0)}>All</button>:<button  className='all-btn' onClick={() =>handleDisplay(0)}>All</button>}
-      {display===1?<button  className='active-btn active' onClick={() =>handleDisplay(1)}>Active</button>:<button  className='active-btn' onClick={() =>handleDisplay(1)}>Active</button>}
-      {display===2?<button  className='comp-btn active' onClick={() =>handleDisplay(2)}>Completed</button>:<button  className='comp-btn' onClick={() =>handleDisplay(2)}>Completed</button>}
-      </div>
-      {findNoofCompletedtodo()>0 && <button className='clr-comp' onClick={() => handleClearCompleted()}>Clear completed</button> }  
-      </div>
-  </div>} 
-  </div> 
-  </div>    
+          <div className='header'>
+            <button className='drop' onClick={() => handleAllCompleted()}>&#9660;</button>
+            <input id='todo' autoComplete='off' type='text' placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
+          </div>
+          <div className='top'>
+            <div className='content'>
+            {display===0 && <DisplayTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
+            {display===1 && <DisplayActiveTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
+            {display===2 && <DisplayCompletedTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
+            </div>
+            {todolist.length>0 && <div className='footer'>
+            <div className='btns'>
+              <div className='ileft'>
+                <FindChecked data={todolist}/>
+                <div className='three-btn'>
+                  {display===0?<button  className='all-btn active' onClick={() =>handleDisplay(0)}>All</button>:<button  className='all-btn' onClick={() =>handleDisplay(0)}>All</button>}
+                  {display===1?<button  className='active-btn active' onClick={() =>handleDisplay(1)}>Active</button>:<button  className='active-btn' onClick={() =>handleDisplay(1)}>Active</button>}
+                  {display===2?<button  className='comp-btn active' onClick={() =>handleDisplay(2)}>Completed</button>:<button  className='comp-btn' onClick={() =>handleDisplay(2)}>Completed</button>}
+                </div>
+              </div>
+              {findNoofCompletedtodo()>0 && <button className='clr-comp' onClick={() => handleClearCompleted()}>Clear completed</button> }  
+            </div>
+            </div>} 
+          </div> 
+      </div>    
     </div>
   );
 }
