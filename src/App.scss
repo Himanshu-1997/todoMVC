@@ -366,20 +366,22 @@
     flex-direction: column;
   }
   .title{
-    margin-top: 0;
+    position:-webkit-sticky;
     position: sticky;
     top:0;
-    z-index: 5;
+    z-index: 1;
     background:teal;
     text-transform: uppercase;
     color: white;
     font-size: 40px;
     letter-spacing: 10px;
+    margin-top: 0;
   }
   .header{
+    position:-webkit-sticky;
     position: sticky;
     top:45px;
-    z-index: 5;
+    z-index: 1;
     background:lightgray;
   }
   .all-btn{
@@ -403,8 +405,8 @@
   .active-btn.active{
       border:0.5px dashed black;
       background:teal;
-    color:white;
-    border-radius:0%;
+      color:white;
+      border-radius:0%;
   }
   .comp-btn.active{
     border:0.5px dashed black;
@@ -439,7 +441,7 @@
     margin-top: 17px;
   }
   .drop{
-    width:13%;
-    font-size: 25px;
+    width:10%;
+    font-size: 20px;
   }
 }

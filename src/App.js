@@ -25,7 +25,7 @@ function App() {
   const [display,setDisplay] = useState(0);
   const [allMarked,setAllMarked]=useState(0);
   const handleEvent = (e) =>{
-    let d=[];
+    let d=todolist;
     if(e.keyCode===ENTER)
       {
         if(e.target.value!=='')
