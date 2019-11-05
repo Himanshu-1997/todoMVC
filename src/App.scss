@@ -383,15 +383,15 @@
     background:lightgray;
   }
   .all-btn{
-    font-size: 12px;
+    font-size: 17px;
     border:0.5px dashed black;
   }
   .active-btn{
-    font-size: 12px;
+    font-size: 17px;
     border:0.5px dashed black;
   }
   .comp-btn{
-    font-size: 12px;
+    font-size: 17px;
     border:0.5px dashed black;
   }
   .all-btn.active{
@@ -423,6 +423,7 @@
   }
   .three-btn{
     justify-content: flex-end;
+    margin-bottom: 5px;
   }
   #todo::placeholder{
     color: #dedede;
