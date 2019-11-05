@@ -362,4 +362,17 @@
   .content{
     flex-direction: column;
   }
+  .title{
+    margin-top: 0;
+    position: sticky;
+    top:0;
+    z-index: 5;
+    background:lightgray;
+  }
+  .header{
+    position: sticky;
+    top:140px;
+    z-index: 5;
+    background:lightgray;
+  }
 }
