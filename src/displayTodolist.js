@@ -29,7 +29,7 @@ const DisplayTodolist = (props) => {
         e.preventDefault();
     }
     const handleDragLeave = (e) =>{
-        console.log()
+        // console.log()
         e.target.parentElement.parentElement.classList.remove('dragOver');
     }
     const handleDrop = (e) =>{
