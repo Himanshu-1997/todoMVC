@@ -367,9 +367,9 @@
   }
   .title{
     position:-webkit-sticky;
-    position: sticky;
+    position: fixed;
     top:0;
-    z-index: 1;
+    z-index: 5;
     background:teal;
     text-transform: uppercase;
     color: white;
@@ -381,7 +381,8 @@
     position:-webkit-sticky;
     position: sticky;
     top:45px;
-    z-index: 1;
+    z-index: 5;
+    margin-top:45px;
     background:lightgray;
   }
   .all-btn{
@@ -437,7 +438,7 @@
     align-self: self-start;
     white-space: nowrap;
     text-decoration-line: underline;
-    text-decoration-style: dashed;
+    text-decoration-style: solid;
     margin-top: 17px;
   }
   .drop{
