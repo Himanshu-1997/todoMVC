@@ -323,6 +323,10 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+.dragOver{
+ background-color:lightgrey;
+ opacity: 0.5;
+}
 
 .wrapper {
   display: flex;

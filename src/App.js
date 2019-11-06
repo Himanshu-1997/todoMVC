@@ -98,7 +98,18 @@ function App() {
     }
     return d;    
   }
-  
+  const handleDragNDrop = (s,d) =>{
+    let src=Number(s);
+    let dest = Number(d);
+    let data = todolist.map((d) =>{
+      return d;
+    });
+    let removedData = Object.assign({},data.splice(src,1)[0]);
+    data.splice(dest,0,removedData);
+    setTodolist(data);
+    localStorage.setItem('todolist',JSON.stringify(data));
+  }
+
   return (
     <div className="App">
       <h1 className='title'>todos</h1>
@@ -109,9 +120,9 @@ function App() {
           </div>
           <div className='top'>
             <div className='content'>
-            {display===0 && <DisplayTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
-            {display===1 && <DisplayActiveTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
-            {display===2 && <DisplayCompletedTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
+            {display===0 && <DisplayTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
+            {display===1 && <DisplayActiveTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
+            {display===2 && <DisplayCompletedTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
             </div>
             {todolist.length>0 && <div className='footer'>
             <div className='btns'>
