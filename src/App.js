@@ -130,7 +130,7 @@ function App() {
   const handleDragOver = (e) =>{
     e.target.parentElement.parentElement.classList.add('dragOver');
     // console.log(e.target.id);
-    if(e.target.id!==desti && e.target.id!=='inner' && e.target.id!=='wrapper'){
+    if(e.target.id!==desti && e.target.id!==srce && e.target.id!=='inner' && e.target.id!=='wrapper'){
       let data = todolist.map((d) =>{
         return d;
       })
