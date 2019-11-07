@@ -19,12 +19,32 @@ const DisplayTodolist = (props) => {
         setIsEdit(false);
         setIndex(-1);
     }
+    const handleDragStart = (e) =>{
+    //    console.log(e.target);
+       e.dataTransfer.setData('text',e.target.id);
+       e.dataTransfer.effectAllowed="move";
+    }
+    const handleDragOver = (e) =>{
+        e.target.parentElement.parentElement.classList.add('dragOver');
+        e.preventDefault();
+    }
+    const handleDragLeave = (e) =>{
+        // console.log()
+        e.target.parentElement.parentElement.classList.remove('dragOver');
+    }
+    const handleDrop = (e) =>{
+        // console.log(e.target.id);
+        let data = e.dataTransfer.getData('text');
+        // console.log(data);
+        e.target.parentElement.parentElement.classList.remove('dragOver');
+        // props.dnD(data,e.target.id);
+    }
     return(
       <div>
        {
            props.data.map((d,i) => {
                return (
-                   <div key={i} className='body' id={i} draggable>
+                   <div key={i} className='body' id={i} draggable onDragStart={handleDragStart} onDragLeave={handleDragLeave} onDragOver={handleDragOver} onDrop={handleDrop}>
                    <div className='list'>
                     <div id='wrapper' className="wrapper">
                        <label className='container'>

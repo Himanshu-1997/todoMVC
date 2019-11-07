@@ -49,7 +49,7 @@ function App() {
    localStorage.setItem('todolist',JSON.stringify(todolist));
   }
   const handleCheckbox = (d) => {
-    console.log(d);
+    // console.log(d);
       if(todolist[d].completed===true){
         todolist[d].completed=false;
         setTodolist([...todolist]);
@@ -120,17 +120,17 @@ function App() {
     let src = Number(e.target.id);
     let data = todolist.map((d)=>d);
     rItem = Object.assign({},data.splice(src,1)[0]);
-    console.log(rItem, data);
+    // console.log(rItem, data);
     data.splice(src,0,rItem);
-    console.log(rItem, data);
+    // console.log(rItem, data);
     // console.log(data,"srce",srce,'desti',desti);
     setTodolist(data); 
-    console.log(rItem,data)
+    // console.log(rItem,data)
   }
   const handleDragOver = (e) =>{
     e.target.parentElement.parentElement.classList.add('dragOver');
-    console.log('Drag over',e.target.id);
-    if(e.target.id!==desti && e.target.id!==srce && e.target.id!=='inner' && e.target.id!=='wrapper'){
+    // console.log(e.target.id);
+    if(e.target.id!==desti && e.target.id!=='inner' && e.target.id!=='wrapper'){
       let data = todolist.map((d) =>{
         return d;
       })
@@ -140,12 +140,11 @@ function App() {
       dest=Number(desti);
       data.splice(dest,0,rItem);
       setTodolist(data);
-      console.log(dest);
+      // console.log(dest);
     }
     e.preventDefault();
   }
   const handleDragEnd = (e) =>{
-    e.target.parentElement.parentElement.classList.remove('dragOver');
     if(check===false){
       let data=todolist.map((d)=>d);
       let dest=Number(desti);
@@ -157,7 +156,7 @@ function App() {
     }
   }
   const handleDrop = (e) =>{
-    e.target.parentElement.parentElement.classList.remove('dragOver');
+     e.target.parentElement.parentElement.classList.remove('dragOver');
     if(desti!=='inner' && e.target.id!=='inner'){
       let data = todolist.map((d) =>{ return d;})
       let dest=Number(desti);
@@ -170,9 +169,6 @@ function App() {
       localStorage.setItem('todolist',JSON.stringify(data));
     }
   }
-  const handleDragLeave = (e) =>{
-    e.target.parentElement.parentElement.classList.remove('dragOver');
-  }
 
   return (
     <div className="App">
@@ -183,7 +179,7 @@ function App() {
             <input id='todo' autoComplete='off' type='text' placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
           </div>
           <div  className='top'>
-            <div id="asda" className='content' onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd} onDrop={handleDrop} onDragLeave={handleDragLeave}>
+            <div  className='content' onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd} onDrop={handleDrop}>
             <div id='inner' ref={listRef}>
               {display===0 && <DisplayTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
               {display===1 && <DisplayActiveTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
