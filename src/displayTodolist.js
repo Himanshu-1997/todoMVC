@@ -39,15 +39,14 @@ const DisplayTodolist = (props) => {
         e.target.parentElement.parentElement.classList.remove('dragOver');
         props.dnD(data,e.target.id);
     }
-
     return(
       <div>
        {
            props.data.map((d,i) => {
                return (
-                   <div className='body' id={i} draggable onDragStart={handleDragStart} onDragLeave={handleDragLeave} onDragOver={handleDragOver} onDrop={handleDrop}>
+                   <div key={i} className='body' id={i} draggable onDragStart={handleDragStart} onDragLeave={handleDragLeave} onDragOver={handleDragOver} onDrop={handleDrop}>
                    <div className='list'>
-                    <div className="wrapper">
+                    <div id='wrapper' className="wrapper">
                        <label className='container'>
                        <input className='checkbox' type='checkbox' checked={d.completed} onChange={() => props.sendCount(i)}/>
                        <span class="checkmark"></span>

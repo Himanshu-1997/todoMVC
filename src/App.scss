@@ -108,6 +108,7 @@
   // overflow:hidden;
   margin-left: auto;
   margin-right: auto;
+  transition: transform ease-in 200ms;
   // border-bottom: 0.25px solid lightgrey;
 }
 
@@ -349,11 +350,13 @@
   }
   body{
     height: 100%;
+    
   }
   body, #root , .App , .shadow, .list, .header, .title, .top, #todo, .body, .content{
     // height:100%;
     width:100%;
   }
+  
   .ele{
     min-width: 80%;
     max-width: 80%;

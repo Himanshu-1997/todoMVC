@@ -3,6 +3,11 @@ import DisplayTodolist from './displayTodolist';
 import DisplayActiveTodolist from './displayActiveTodolist';
 import DisplayCompletedTodolist from './displayCompletedTodolist';
 import './App.scss';
+
+let srce='-1';
+let desti='-1';
+let check=false;
+let rItem={};
 const ENTER=13;
 const FindChecked = (props) => {
   let c=0;
@@ -24,6 +29,9 @@ function App() {
   const [todolist,setTodolist] = useState(list);
   const [display,setDisplay] = useState(0);
   const [allMarked,setAllMarked]=useState(0);
+  const listRef = React.createRef();
+  // const [srce,setSrce]=useState('-1');
+  // const [desti,setDesti]=useState('-1');
   const handleEvent = (e) =>{
     let d=todolist;
     if(e.keyCode===ENTER)
@@ -104,10 +112,57 @@ function App() {
     let data = todolist.map((d) =>{
       return d;
     });
-    let removedData = Object.assign({},data.splice(src,1)[0]);
-    data.splice(dest,0,removedData);
-    setTodolist(data);
-    localStorage.setItem('todolist',JSON.stringify(data));
+  }
+
+  const handleDragStart=(e) =>{
+    srce = e.target.id;
+    desti= e.target.id;
+    let src = Number(e.target.id);
+    let data = todolist.map((d)=>d);
+    rItem = Object.assign({},data.splice(src,1)[0]);
+    data.splice(src,0,rItem);
+    console.log(data,"srce",srce,'desti',desti);
+    setTodolist(data); 
+  }
+  const handleDragOver = (e) =>{
+    console.log(e.target.id);
+    if(e.target.id!==desti && e.target.id!=='inner' && e.target.id!=='wrapper'){
+      let data = todolist.map((d) =>{
+        return d;
+      })
+      let dest=Number(desti);
+      data.splice(dest,1);
+      desti = e.target.id;
+      dest=Number(desti);
+      data.splice(dest,0,rItem);
+      setTodolist(data);
+      console.log(dest);
+    }
+    e.preventDefault();
+  }
+  const handleDragEnd = (e) =>{
+    if(check===false){
+      let data=todolist.map((d)=>d);
+      let dest=Number(desti);
+      data.splice(dest,1);
+      let src=Number(e.target.id);
+      data.splice(src,0,rItem);
+      setTodolist(data);
+      localStorage.setItem('todolist',JSON.stringify(data));
+    }
+  }
+  const handleDrop = (e) =>{
+    if(desti!=='inner' && e.target.id!=='inner'){
+      let data = todolist.map((d) =>{ return d;})
+      let dest=Number(desti);
+      data.splice(dest,1);
+      dest=Number(e.target.id);
+      desti=e.target.id;
+      data.splice(dest,0,rItem);
+      setTodolist(data);
+      check=true;
+      localStorage.setItem('todolist',JSON.stringify(data));
+    }
   }
 
   return (
@@ -118,11 +173,13 @@ function App() {
             <button className='drop' onClick={() => handleAllCompleted()}>&#9660;</button>
             <input id='todo' autoComplete='off' type='text' placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
           </div>
-          <div className='top'>
-            <div className='content'>
-            {display===0 && <DisplayTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
-            {display===1 && <DisplayActiveTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
-            {display===2 && <DisplayCompletedTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
+          <div  className='top'>
+            <div  className='content' onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd} onDrop={handleDrop}>
+            <div id='inner' ref={listRef}>
+              {display===0 && <DisplayTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
+              {display===1 && <DisplayActiveTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
+              {display===2 && <DisplayCompletedTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
+            </div>
             </div>
             {todolist.length>0 && <div className='footer'>
             <div className='btns'>
