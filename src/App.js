@@ -4,7 +4,7 @@ import DisplayActiveTodolist from './displayActiveTodolist';
 import DisplayCompletedTodolist from './displayCompletedTodolist';
 import './App.scss';
 
-let srce='-1';
+let srce = '-1';
 let desti='-1';
 let check=false;
 let rItem={};
@@ -106,13 +106,13 @@ function App() {
     }
     return d;    
   }
-  const handleDragNDrop = (s,d) =>{
-    let src=Number(s);
-    let dest = Number(d);
-    let data = todolist.map((d) =>{
-      return d;
-    });
-  }
+  // const handleDragNDrop = (s,d) =>{
+  //   let src=Number(s);
+  //   let dest = Number(d);
+  //   let data = todolist.map((d) =>{
+  //     return d;
+  //   });
+  // }
 
   const handleDragStart=(e) =>{
     srce = e.target.id;
@@ -120,13 +120,17 @@ function App() {
     let src = Number(e.target.id);
     let data = todolist.map((d)=>d);
     rItem = Object.assign({},data.splice(src,1)[0]);
+    console.log(rItem, data);
     data.splice(src,0,rItem);
-    console.log(data,"srce",srce,'desti',desti);
+    console.log(rItem, data);
+    // console.log(data,"srce",srce,'desti',desti);
     setTodolist(data); 
+    console.log(rItem,data)
   }
   const handleDragOver = (e) =>{
-    console.log(e.target.id);
-    if(e.target.id!==desti && e.target.id!=='inner' && e.target.id!=='wrapper'){
+    e.target.parentElement.parentElement.classList.add('dragOver');
+    console.log('Drag over',e.target.id);
+    if(e.target.id!==desti && e.target.id!==srce && e.target.id!=='inner' && e.target.id!=='wrapper'){
       let data = todolist.map((d) =>{
         return d;
       })
@@ -141,6 +145,7 @@ function App() {
     e.preventDefault();
   }
   const handleDragEnd = (e) =>{
+    e.target.parentElement.parentElement.classList.remove('dragOver');
     if(check===false){
       let data=todolist.map((d)=>d);
       let dest=Number(desti);
@@ -152,6 +157,7 @@ function App() {
     }
   }
   const handleDrop = (e) =>{
+    e.target.parentElement.parentElement.classList.remove('dragOver');
     if(desti!=='inner' && e.target.id!=='inner'){
       let data = todolist.map((d) =>{ return d;})
       let dest=Number(desti);
@@ -164,6 +170,9 @@ function App() {
       localStorage.setItem('todolist',JSON.stringify(data));
     }
   }
+  const handleDragLeave = (e) =>{
+    e.target.parentElement.parentElement.classList.remove('dragOver');
+  }
 
   return (
     <div className="App">
@@ -174,11 +183,11 @@ function App() {
             <input id='todo' autoComplete='off' type='text' placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
           </div>
           <div  className='top'>
-            <div  className='content' onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd} onDrop={handleDrop}>
+            <div id="asda" className='content' onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd} onDrop={handleDrop} onDragLeave={handleDragLeave}>
             <div id='inner' ref={listRef}>
-              {display===0 && <DisplayTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
-              {display===1 && <DisplayActiveTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
-              {display===2 && <DisplayCompletedTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)} dnD={(s,d) => handleDragNDrop(s,d)} />}
+              {display===0 && <DisplayTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
+              {display===1 && <DisplayActiveTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
+              {display===2 && <DisplayCompletedTodolist data={todolist} editData={(d) => {handleClick(d)}} sendCount={(d) => {handleCheckbox(d)}} changeData={(d,id) =>handleEditData(d,id)}/>}
             </div>
             </div>
             {todolist.length>0 && <div className='footer'>
