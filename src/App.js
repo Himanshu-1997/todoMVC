@@ -106,13 +106,6 @@ function App() {
     }
     return d;    
   }
-  // const handleDragNDrop = (s,d) =>{
-  //   let src=Number(s);
-  //   let dest = Number(d);
-  //   let data = todolist.map((d) =>{
-  //     return d;
-  //   });
-  // }
 
   const handleDragStart=(e) =>{
     srce = e.target.id;
@@ -120,16 +113,11 @@ function App() {
     let src = Number(e.target.id);
     let data = todolist.map((d)=>d);
     rItem = Object.assign({},data.splice(src,1)[0]);
-    // console.log(rItem, data);
     data.splice(src,0,rItem);
-    // console.log(rItem, data);
-    // console.log(data,"srce",srce,'desti',desti);
     setTodolist(data); 
-    // console.log(rItem,data)
   }
   const handleDragOver = (e) =>{
     e.target.parentElement.parentElement.classList.add('dragOver');
-    // console.log(e.target.id);
     if(e.target.id!==desti && e.target.id!==srce && e.target.id!=='inner' && e.target.id!=='wrapper'){
       let data = todolist.map((d) =>{
         return d;
@@ -140,7 +128,6 @@ function App() {
       dest=Number(desti);
       data.splice(dest,0,rItem);
       setTodolist(data);
-      // console.log(dest);
     }
     e.preventDefault();
   }
@@ -176,6 +163,7 @@ function App() {
       <div className='shadow'>
           <div className='header'>
             <button className='drop' onClick={() => handleAllCompleted()}>&#9660;</button>
+            <label className='hiddenLabel' for='todo'>Add todo</label>
             <input id='todo' autoComplete='off' type='text' placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
           </div>
           <div  className='top'>

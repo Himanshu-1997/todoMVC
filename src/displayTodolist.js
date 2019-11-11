@@ -20,7 +20,6 @@ const DisplayTodolist = (props) => {
         setIndex(-1);
     }
     const handleDragStart = (e) =>{
-    //    console.log(e.target);
        e.dataTransfer.setData('text',e.target.id);
        e.dataTransfer.effectAllowed="move";
     }
@@ -29,15 +28,11 @@ const DisplayTodolist = (props) => {
         e.preventDefault();
     }
     const handleDragLeave = (e) =>{
-        // console.log()
         e.target.parentElement.parentElement.classList.remove('dragOver');
     }
     const handleDrop = (e) =>{
-        // console.log(e.target.id);
         let data = e.dataTransfer.getData('text');
-        // console.log(data);
         e.target.parentElement.parentElement.classList.remove('dragOver');
-        // props.dnD(data,e.target.id);
     }
     return(
       <div>
@@ -52,7 +47,7 @@ const DisplayTodolist = (props) => {
                        <span class="checkmark"></span>
                         </label>
                             {isEdit===false || index!==i?
-                        <li id={i} style={d.completed?{textDecorationLine:'line-through',color:'#d9d9d9'}:{textDecorationLine:'none'}} className='ele' onDoubleClick={() =>handleEdit(i)}>{d.list}</li>:<input autoFocus type='text' onBlur={(e) =>handleOnBlur(e,i)}  className='editInput' onKeyDown={(e) =>handleEvent(e,i)} defaultValue={props.data[i].list}></input>}
+                        <li id={i} style={d.completed?{textDecorationLine:'line-through',color:'#d9d9d9'}:{textDecorationLine:'none'}} className='ele' onDoubleClick={() =>handleEdit(i)}>{d.list}</li>:<><label className='hiddenLabel' for='todo'>Add todo</label><input autoFocus type='text' onBlur={(e) =>handleOnBlur(e,i)}  className='editInput' onKeyDown={(e) =>handleEvent(e,i)} defaultValue={props.data[i].list}></input></>}
                          <button onClick={() =>props.editData(i)} className='btn'>X</button>
                     </div>
                    </div>

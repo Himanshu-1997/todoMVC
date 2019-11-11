@@ -34,15 +34,11 @@ const DisplayActiveTodolist = (props) => {
             e.preventDefault();
         }
         const handleDragLeave = (e) =>{
-            // console.log()
             e.target.parentElement.parentElement.classList.remove('dragOver');
         }
         const handleDrop = (e) =>{
-            // console.log(e.target.id);
             let data = e.dataTransfer.getData('text');
-            // console.log(data);
             e.target.parentElement.parentElement.classList.remove('dragOver');
-            // props.dnD(data,e.target.id);
         }
     return(
       <div>
@@ -58,7 +54,7 @@ const DisplayActiveTodolist = (props) => {
                     <span class="checkmark"></span>
                    </label>
                     {isEdit===false || index!==i?
-                   <li id={i} style={d.completed?{textDecorationLine:'line-through'}:{textDecorationLine:'none'}} className='ele' onDoubleClick={() =>handleEdit(i)} draggable >{d.list}</li>:<input type='text' className='editInput' autoFocus onBlur={(e) =>handleOnBlur(e,i)} onKeyDown={(e) =>handleEvent(e,i)} defaultValue={props.data[i].list}></input>}
+                   <li id={i} style={d.completed?{textDecorationLine:'line-through'}:{textDecorationLine:'none'}} className='ele' onDoubleClick={() =>handleEdit(i)} draggable >{d.list}</li>:<><label className='hiddenLabel' for='todo'>Add todo</label><input type='text' className='editInput' autoFocus onBlur={(e) =>handleOnBlur(e,i)} onKeyDown={(e) =>handleEvent(e,i)} defaultValue={props.data[i].list}></input></>}
                    <button onClick={() =>props.editData(i)} className='btn'>X</button>
                    </div>
                    </div>
