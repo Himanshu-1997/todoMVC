@@ -30,8 +30,6 @@ function App() {
   const [display,setDisplay] = useState(0);
   const [allMarked,setAllMarked]=useState(0);
   const listRef = React.createRef();
-  // const [srce,setSrce]=useState('-1');
-  // const [desti,setDesti]=useState('-1');
   const handleEvent = (e) =>{
     let d=todolist;
     if(e.keyCode===ENTER)
@@ -49,7 +47,6 @@ function App() {
    localStorage.setItem('todolist',JSON.stringify(todolist));
   }
   const handleCheckbox = (d) => {
-    // console.log(d);
       if(todolist[d].completed===true){
         todolist[d].completed=false;
         setTodolist([...todolist]);
