@@ -10,6 +10,8 @@ const Sidebar = () =>{
             <div className='sb-body'>
                 <div className='sb-content'>
                     Help us</div>
+                <div className='sb-content'>
+                &#8853; create new todolist </div>
             </div>
             <div className='sb-footer'>
                     &#169; Himanshu Kumar, 2019
