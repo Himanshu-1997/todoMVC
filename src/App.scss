@@ -106,6 +106,7 @@
   // border-bottom: 0.25px solid lightgrey;
 }
 
+
 .editInput{
   flex-grow: 1;
   height:15px;
@@ -142,6 +143,11 @@
   border-top:0.5px solid lightgray;
   flex-flow: nowrap;
   padding: 7px;
+}
+.fullbody{
+  display: flex;
+  flex-direction: column;
+  height:100%;
 }
 
 .list:hover .btn{
@@ -224,7 +230,6 @@
   overflow: hidden;
   outline:none;
 }
-
 .clr-comp:hover{
   text-decoration-line: underline;
 }
@@ -256,6 +261,7 @@
   user-select: none;
   margin-top: 15px;
   margin-bottom: 15px;
+  margin-right: 5px;
 }
 
 /* Hide the browser's default checkbox */
@@ -276,6 +282,9 @@
   width: 25px;
   background-color: #eee;
   border-radius: 50%;
+}
+.newMenu{
+  display: none;
 }
 
 /* On mouse-over, add a grey background color */
@@ -364,6 +373,9 @@
     flex-direction: column;
   }
   .title{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     position:-webkit-sticky;
     position: fixed;
     top:0;
@@ -442,5 +454,30 @@
   .drop{
     width:10%;
     font-size: 20px;
+  }
+  .newMenu{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-right: 40px;
+  }
+  .menu{
+    font-size: 30px;
+    // width:60px;
+    // margin:0;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  .sidebar{
+    display: flex;
+    width: 68%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    z-index:5;
+  }
+  .fullbody{
+    display:flex;
+    height:100%;
   }
 }
