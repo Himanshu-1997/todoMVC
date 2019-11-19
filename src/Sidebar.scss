@@ -29,13 +29,14 @@
     display: flex;
     width:100%;
     border-bottom: 0.1px solid lightgray;
-    font-size:25px;
+    font-size:20px;
     margin-top: 5px;
     // background-color: teal;
     // color:white;
     // padding-left:10px ;
 }
 .sb-footer{
+    position:sticky;
     display: flex;
     flex-direction: row;
     justify-content: center;
