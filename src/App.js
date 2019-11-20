@@ -36,7 +36,7 @@ function App() {
   const handleEvent = (e) => {
     let d = todolist;
     if (e.keyCode === ENTER) {
-      if (e.target.value !== '')
+      if (e.target.value !== '' && e.target.value.trim().length>0)
         d = [...todolist, { list: e.target.value, completed: false }];
       setTodolist(d);
       e.target.value = ''
@@ -64,7 +64,8 @@ function App() {
     setDisplay(d);
   }
   const handleEditData = (d, id) => {
-    todolist[id].list = d;
+    if(d.trim().length>0)
+      todolist[id].list = d;
     setTodolist(todolist);
     localStorage.setItem('todolist', JSON.stringify(todolist));
   }
@@ -165,7 +166,7 @@ function App() {
 
   return (
     <div className="App" onClick={handleSidebarClick}>
-      <div className='fullbody' style={isSideOpen?{opacity:0.4}:{opacity:1}}>
+      <div className='fullbody' style={isSideOpen?{opacity:0.4,overflow:'hidden'}:{opacity:1,overflow:'auto'}}>
         <div className='title'>
           <div className='newMenu'>
             <div className='menu' onClick={handleMenuClick}>&#9776;</div>
