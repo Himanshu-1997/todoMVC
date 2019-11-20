@@ -1,0 +1,47 @@
+.sp-headerWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:100%;
+    // padding:10px;
+    background-color: teal;
+    color: white;
+    height: 50px;
+}
+.sp-header{
+    display: flex;
+    justify-content: center;
+    flex-basis: 90%;
+    align-self: center;
+}
+.closebutton{
+    display: flex;
+    align-self: center;
+    margin-right: 5px;
+}
+.sp-body{
+    padding:10px;
+    max-width: 90%;
+    font-size: 17px;
+    list-style:none;
+}
+.sp-wrapper{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    // margin-top: 10px;
+    // padding:10px;
+}
+li{
+    margin:10px;
+    text-align: left;
+}
+.sp-listitem{
+    display: flex;
+    flex-direction: row;
+}
+.sp-listitemnum{
+    display: flex;
+    flex-basis: 5%;
+    align-self: center;
+}

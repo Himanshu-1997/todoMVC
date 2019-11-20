@@ -3,6 +3,7 @@ import DisplayTodolist from './displayTodolist';
 import DisplayActiveTodolist from './displayActiveTodolist';
 import DisplayCompletedTodolist from './displayCompletedTodolist';
 import Sidebar from './Sidebar';
+import Support from './Support';
 import './App.scss';
 import './Sidebar.scss';
 
@@ -33,6 +34,7 @@ function App() {
   const [allMarked, setAllMarked] = useState(0);
   const listRef = React.createRef();
   const [isSideOpen, setIsSideOpen] = useState(false);
+  const [isHelp,setIsHelp]=useState(false);
   const handleEvent = (e) => {
     let d = todolist;
     if (e.keyCode === ENTER) {
@@ -132,6 +134,7 @@ function App() {
     e.preventDefault();
   }
   const handleDragEnd = (e) => {
+    e.target.parentElement.parentElement.classList.add('dragOver');
     if (check === false) {
       let data = todolist.map((d) => d);
       let dest = Number(desti);
@@ -163,10 +166,17 @@ function App() {
     if (isSideOpen)
       setIsSideOpen(!isSideOpen);
   }
+  const handleToggleSidebar = (d) =>{
+    setIsSideOpen(d);
+    setIsHelp(true);
+  }
+  const hideSupport = (d) =>{
+    setIsHelp(d);
+  }
 
   return (
     <div className="App" onClick={handleSidebarClick}>
-      <div className='fullbody' style={isSideOpen?{opacity:0.4,overflow:'hidden'}:{opacity:1,overflow:'auto'}}>
+      <div className='fullbody' style={isSideOpen || isHelp?{opacity:0.2,overflow:'hidden'}:{opacity:1,overflow:'auto'}}>
         <div className='title'>
           <div className='newMenu'>
             <div className='menu' onClick={handleMenuClick}>&#9776;</div>
@@ -204,8 +214,8 @@ function App() {
             }
           </div>
         </div> </div>
-      {!isSideOpen ? null : <div className='sidebar' onClick={e => e.stopPropagation()}><Sidebar /></div>}
-
+      {!isSideOpen ? null : <div className='sidebar' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={(d) => handleToggleSidebar(d)}/></div>}
+      {isHelp?<div className='help-us'><Support handleSupport={(d) => hideSupport(d)}/></div>:null}
     </div>
   );
 }

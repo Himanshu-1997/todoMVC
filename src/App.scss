@@ -488,4 +488,20 @@
   .editInput{
     font-size: 20px;
   }
+  .help-us{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    // top:10;
+    // margin-top: 100px;
+    height:100%;
+    width:100%;
+    z-index:10;
+    text-align: left;
+    align-self: center;
+    color: black;
+    background-color: white;
+    font-size:25px;
+    // padding: 10px;
+  }
 }
