@@ -284,6 +284,7 @@
   width: 25px;
   background-color: #eee;
   border-radius: 50%;
+  cursor:default;
 }
 .newMenu{
   display: none;
@@ -457,8 +458,10 @@
     margin-top: 17px;
   }
   .drop{
-    width:10%;
-    font-size: 20px;
+    width:15%;
+    font-size: 30px;
+    color:teal;
+    cursor:default;
   }
   .newMenu{
     display: flex;
