@@ -484,14 +484,24 @@
     justify-content: center;
     flex-grow: 1;
   }
+  
+  
   .sidebar{
     display: flex;
     width: 68%;
     height: 100%;
     position: fixed;
     top:0;
+    transition: left 0.3s ease;
     z-index:5;
+    &.close{
+      left:-100%;
+    }
+    &.open{
+      left:0;
+    }
   }
+  
   .fullbody{
     display:flex;
     height:100%;

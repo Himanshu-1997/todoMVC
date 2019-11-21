@@ -170,8 +170,10 @@ function App() {
     setIsSideOpen(!isSideOpen);
   }
   const handleSidebarClick = () => {
-    if (isSideOpen)
+    if (isSideOpen){
       setIsSideOpen(!isSideOpen);
+      // let x = document.getElementById('.sidebar').classList.add('close');
+    }
   }
   const handleToggleSidebar = (d) =>{
     setIsSideOpen(d);
@@ -221,7 +223,7 @@ function App() {
             }
           </div>
         </div> </div>
-      {!isSideOpen ? null : <div className='sidebar' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={(d) => handleToggleSidebar(d)}/></div>}
+      {!isSideOpen ? <div className='sidebar close' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={(d) => handleToggleSidebar(d)}/></div>: <div className='sidebar open' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={(d) => handleToggleSidebar(d)}/></div>}
       {isHelp?<div className='help-us'><Support handleSupport={(d) => hideSupport(d)}/></div>:null}
     </div>
   );
