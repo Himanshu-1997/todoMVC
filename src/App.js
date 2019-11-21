@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import DisplayTodolist from './displayTodolist';
 import DisplayActiveTodolist from './displayActiveTodolist';
 import DisplayCompletedTodolist from './displayCompletedTodolist';
@@ -27,7 +27,7 @@ const FindChecked = (props) => {
 }
 
 let list = localStorage.getItem('todolist') ? JSON.parse(localStorage.getItem('todolist')) : [];
-
+let loc={};
 function App() {
   const [todolist, setTodolist] = useState(list);
   const [display, setDisplay] = useState(0);
@@ -35,13 +35,17 @@ function App() {
   const listRef = React.createRef();
   const [isSideOpen, setIsSideOpen] = useState(false);
   const [isHelp,setIsHelp]=useState(false);
+  useEffect(() =>{
+    loc=listRef.current.parentElement.parentElement.parentElement.parentElement;
+    loc.scrollTop = loc.scrollHeight;
+  },[loc.scrollHeight]);
   const handleEvent = (e) => {
     let d = todolist;
     if (e.keyCode === ENTER) {
       if (e.target.value !== '' && e.target.value.trim().length>0)
         d = [...todolist, { list: e.target.value, completed: false }];
       setTodolist(d);
-      e.target.value = ''
+      e.target.value = '';
     }
     localStorage.setItem('todolist', JSON.stringify(d));
   }
@@ -179,7 +183,7 @@ function App() {
 
   return (
     <div className="App" onClick={handleSidebarClick}>
-      <div className='fullbody' style={isSideOpen || isHelp?{opacity:0.2,overflow:'hidden'}:{opacity:1,overflow:'auto'}}>
+      <div className='fullbody' style={isSideOpen || isHelp?{opacity:0.2,overflow:'hidden',pointerEvents:"none"}:{opacity:1,overflow:'auto'}}>
         <div className='title'>
           <div className='newMenu'>
             <div className='menu' onClick={handleMenuClick}>&#9776;</div>

@@ -31,7 +31,6 @@ const DisplayTodolist = (props) => {
         e.target.parentElement.parentElement.classList.remove('dragOver');
     }
     const handleDrop = (e) =>{
-        let data = e.dataTransfer.getData('text');
         e.target.parentElement.parentElement.classList.remove('dragOver');
     }
     return(
