@@ -149,6 +149,9 @@
   flex-direction: column;
   height:100%;
 }
+.sidebar{
+  display: none;
+}
 
 .list:hover .btn{
   display: flex;
