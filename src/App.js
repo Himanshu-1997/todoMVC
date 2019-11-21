@@ -120,7 +120,7 @@ function App() {
   }
   const handleDragOver = (e) => {
     e.target.parentElement.parentElement.classList.add('dragOver');
-    if (e.target.id !== desti && e.target.id !== srce && e.target.id !== 'inner' && e.target.id !== 'wrapper' && e.target.id!=='content' && e.target.id!=='top') {
+    if (e.target.id !== desti && e.target.id !== srce && e.target.id !== 'inner' && e.target.id !== 'wrapper' && e.target.id!=='content') {
       let data = todolist.map((d) => {
         return d;
       })
@@ -130,13 +130,13 @@ function App() {
       dest = Number(desti);
       data.splice(dest, 0, rItem);
       setTodolist(data);
-      localStorage.setItem('todolist', JSON.stringify(data));
+      e.preventDefault();
     }
+    localStorage.setItem('todolist', JSON.stringify(todolist));
     e.preventDefault();
   }
   const handleDragEnd = (e) => {
-    console.log('onDragEnd',e.target);
-    if (check === false && e.target.id!=='content' && e.target.id!=='top') {
+    if (check === false && e.target.id==='content' && e.target.id==='inner') {
       let data = todolist.map((d) => d);
       let dest = Number(desti);
       data.splice(dest, 1);
@@ -147,11 +147,10 @@ function App() {
     }
   }
   const handleDrop = (e) => {
-    console.log('onDrop',e.target);
     if(e.target.id==='inner'){
       setTodolist(todolist);
     }
-    else if (desti !== 'inner' && e.target.id !== 'inner' && e.target.id!=='content' && e.target.id!=='top') {
+    else if (desti !== 'inner' && e.target.id !== 'inner' && e.target.id!=='content') {
       let data = todolist.map((d) => { return d; })
       let dest = Number(desti);
       data.splice(dest, 1);
