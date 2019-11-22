@@ -11,9 +11,9 @@ const Sidebar = (props) =>{
             </div>
             <div className='sb-body'>
                 <div className='sb-content' onClick={()=>props.handleSidebar(false)}>
-                    How to use it ?</div>
+                    How to use it. &#9432;</div>
                 <div className='sb-content'>
-                &#8853; create new todolist </div>
+                create new todolist &#8853;  </div>
             </div>
             <div className='sb-footer'>
                     &#169; Himanshu Kumar, 2019

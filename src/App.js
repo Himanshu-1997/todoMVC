@@ -43,7 +43,7 @@ function App() {
     let d = todolist;
     if (e.keyCode === ENTER) {
       if (e.target.value !== '' && e.target.value.trim().length>0)
-        d = [...todolist, { list: e.target.value, completed: false }];
+        d = [...todolist, { list: e.target.value, completed: false}];
       setTodolist(d);
       e.target.value = '';
     }
@@ -172,7 +172,6 @@ function App() {
   const handleSidebarClick = () => {
     if (isSideOpen){
       setIsSideOpen(!isSideOpen);
-      // let x = document.getElementById('.sidebar').classList.add('close');
     }
   }
   const handleToggleSidebar = (d) =>{
