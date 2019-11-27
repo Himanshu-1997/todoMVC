@@ -88,6 +88,9 @@
   display:flex;
   justify-content: flex-start;
 }
+.border-bottom{
+  border:1px solid gray;
+}
 
 .header{
   display: flex;
@@ -135,8 +138,7 @@
 }
 
 .btns{
-  display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   background-color: white;
   width:477px;
@@ -225,6 +227,7 @@
 .ileft{
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .clr-comp{
   background-color: Transparent;
@@ -347,6 +350,12 @@
 }
 .three-btn{
   display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 5px;
+    margin-top: 10px;
+}
+.btn-clrcomp{
+  display: flex;
 }
 
 @media (max-width:650px){
@@ -439,9 +448,14 @@
     color:white;
     border-radius:0%;
   }
-  .ileft{
+  .btns{
     display: flex;
     flex-direction: column;
+  }
+  .ileft{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     flex-basis: 75%;
   }
   .noItemsLeft{
@@ -450,20 +464,22 @@
     margin-left: 10px;
   }
   .three-btn{
-    justify-content: flex-end;
+    justify-content: space-evenly;
     margin-bottom: 5px;
+    margin-top: 10px;
   }
   #todo::placeholder{
     color: #dedede;
   }
   .clr-comp{
     padding:1;
+    // font-size: 16px;
     width:min-content;
     align-self: self-start;
     white-space: nowrap;
     text-decoration-line: underline;
     text-decoration-style: solid;
-    margin-top: 17px;
+    margin-top: 12px;
   }
   .drop{
     width:15%;
@@ -528,5 +544,8 @@
     background-color: white;
     font-size:25px;
     // padding: 10px;
+  }
+  .border-bottom{
+    border:1px solid gray;
   }
 }

@@ -210,13 +210,17 @@ function App() {
                 <div className='btns'>
                   <div className='ileft'>
                     <FindChecked data={todolist} />
-                    <div className='three-btn'>
+                    <div className='btn-clrcomp'>
+                    {findNoofCompletedtodo() > 0 && <button className='clr-comp' onClick={() => handleClearCompleted()}>Clear completed</button>}
+                    </div>
+                  </div>
+                  <div className='border-bottom '>
+                  </div>
+                  <div className='three-btn'>
                       {display === 0 ? <button className='all-btn active' onClick={() => handleDisplay(0)}>All</button> : <button className='all-btn' onClick={() => handleDisplay(0)}>All</button>}
                       {display === 1 ? <button className='active-btn active' onClick={() => handleDisplay(1)}>Active</button> : <button className='active-btn' onClick={() => handleDisplay(1)}>Active</button>}
                       {display === 2 ? <button className='comp-btn active' onClick={() => handleDisplay(2)}>Completed</button> : <button className='comp-btn' onClick={() => handleDisplay(2)}>Completed</button>}
-                    </div>
                   </div>
-                  {findNoofCompletedtodo() > 0 && <button className='clr-comp' onClick={() => handleClearCompleted()}>Clear completed</button>}
                 </div>
               </div>
             }
