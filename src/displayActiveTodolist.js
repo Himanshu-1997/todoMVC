@@ -54,7 +54,7 @@ const DisplayActiveTodolist = (props) => {
                    </label>
                     {isEdit===false || index!==i?
                    <li id={i} style={d.completed?{textDecorationLine:'line-through'}:{textDecorationLine:'none'}} className='ele' onDoubleClick={() =>handleEdit(i)} draggable >{d.list}</li>:<><label className='hiddenLabel' for='todo'>Add todo</label><input type='text' className='editInput' autoFocus onBlur={(e) =>handleOnBlur(e,i)} onKeyDown={(e) =>handleEvent(e,i)} defaultValue={props.data[i].list}></input></>}
-                   <button onClick={() =>props.editData(i)} className='btn'>X</button>
+                   <button onClick={() =>props.editData(i)} className='btn'>⌦</button>
                    </div>
                    </div>
                    </div>

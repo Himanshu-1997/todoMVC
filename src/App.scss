@@ -81,11 +81,13 @@ li{
   font-weight: inherit;
 }
 .btn{
+  align-self: flex-start;
+  padding-top: 14px;
   display: none;
   background-color: Transparent;
   background-repeat:no-repeat;
   border: none;
-  cursor:pointer;
+  cursor: default;
   overflow: hidden;
   outline:none;
   font-size: 14px;
@@ -109,9 +111,6 @@ li{
 .body{
   display: flex;
   justify-content: center;
-  // overflow:hidden;
-  // margin-left: auto;
-  // margin-right: auto;
   transition: transform ease-in 200ms;
   // border-bottom: 0.25px solid lightgrey;
 }
@@ -163,9 +162,9 @@ li{
   
 }
 
-.list:hover .btn{
+.list .btn{
   display: flex;
-  color:#d61919b4;
+  color:rgb(173, 168, 214);
   font-size:20px;
 }
 .all-btn{
@@ -247,6 +246,9 @@ li{
 .clr-comp:hover{
   text-decoration-line: underline;
 }
+.rightArrow{
+  display: none;
+}
 .ele{
   display: flex;
   list-style-type: none;
@@ -275,7 +277,7 @@ li{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  margin-top: 15px;
+  margin-top: 14px;
 }
 
 /* Hide the browser's default checkbox */
@@ -297,6 +299,7 @@ li{
   background-color: #eee;
   border-radius: 50%;
   cursor:default;
+  margin-top: 5px;
 }
 .newMenu{
   display: none;
@@ -343,12 +346,12 @@ li{
   transform: rotate(45deg);
 }
 .dragOver{
- background-color:#00a0a0;
+ background-color:#012b72;
 }
 
 
 .wrapper {
-  padding: 0;
+  padding-right: 16px;
   display: flex;
   flex-grow: 1;
   align-items: center;
@@ -382,7 +385,8 @@ li{
     width:100%;
   }
   .dragOver{
-     background-color:#00a0a0;
+     background-color:#6394e9;
+     color:white;
     }
   
   .ele{
@@ -415,7 +419,7 @@ li{
     position: fixed;
     top:0;
     z-index: 5;
-    background:teal;
+    background:#012b72;
     text-transform: uppercase;
     color: white;
     font-size: 40px;
@@ -451,19 +455,19 @@ li{
   }
   .all-btn.active{
     border:0.5px dashed black;
-    background:teal;
+    background:#012b72;
     color:white;
     border-radius:0%;
   }
   .active-btn.active{
       border:0.5px dashed black;
-      background:teal;
+      background:#012b72;
       color:white;
       border-radius:0%;
   }
   .comp-btn.active{
     border:0.5px dashed black;
-    background:teal;
+    background:#012b72;
     color:white;
     border-radius:0%;
   }
@@ -493,7 +497,7 @@ li{
   }
   .clr-comp{
     padding:1;
-    // font-size: 16px;
+    font-size: 16px;
     width:min-content;
     align-self: self-start;
     white-space: nowrap;
@@ -507,7 +511,7 @@ li{
     justify-content: center;
     width:15%;
     font-size: 25px;
-    color:teal;
+    color:#012b72;
     cursor:default;
   }
   .newMenu{
@@ -557,8 +561,6 @@ li{
     display: flex;
     justify-content: center;
     position: fixed;
-    // top:10;
-    // margin-top: 100px;
     height:100%;
     width:100%;
     z-index:10;
@@ -567,9 +569,45 @@ li{
     color: black;
     background-color: white;
     font-size:25px;
-    // padding: 10px;
   }
   .border-bottom{
     border:1px solid gray;
+  }
+  .rightArrow{
+    display: flex;
+    flex-direction: column;
+    height: 70px;
+    flex-basis: auto;
+    background-color: white;
+    font-size: 50px;
+    justify-content: center;
+    color: #012b72;
+    padding-right: 20px;
+  }
+  .deletelist{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.5);
+    height: 20%;
+    // border:0.5px solid black;
+    // border-radius: 5%;
+    background-color: white;
+    position: fixed;
+    transition: bottom 0.3s ease;
+    z-index:5;
+    &.close{
+      bottom:-100%;
+    }
+    &.open{
+      bottom:0;
+    }
+  }
+  .overlay{
+    position: fixed;
+    top:0;
+    height:100%;
+    width:100%;
+    background-color: rgba(0,0,0,0.5);
   }
 }

@@ -1,0 +1,21 @@
+.del-wrapper{
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    padding:13px;
+    background-color: white;
+    z-index: 10;
+}
+.del-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-basis: 60%;
+    font-size:20px;
+}
+.del-content{
+    display: flex;
+    flex-direction: row;
+    flex-basis: 10%;
+    justify-content: flex-end;
+}
