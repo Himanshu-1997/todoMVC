@@ -46,7 +46,7 @@ const DisplayTodolist = (props) => {
                        <span class="checkmark"></span>
                         </label>
                             {isEdit===false || index!==i?
-                        <li id={i} style={d.completed?{textDecorationLine:'line-through',color:'#d9d9d9'}:{textDecorationLine:'none'}} className='ele' onDoubleClick={() =>handleEdit(i)}>{d.list}</li>:<><label className='hiddenLabel' for='todo'>Add todo</label><input autoFocus type='text' onBlur={(e) =>handleOnBlur(e,i)}  className='editInput' onKeyDown={(e) =>handleEvent(e,i)} defaultValue={props.data[i].list}></input></>}
+                        <li id={i} style={d.completed?{textDecorationLine:'line-through',color:'#d9d9d9'}:{textDecorationLine:'none'}} className='ele' onClick={() =>handleEdit(i)}>{d.list}</li>:<><label className='hiddenLabel' for='todo'>Add todo</label><input autoFocus type='text' onBlur={(e) =>handleOnBlur(e,i)}  className='editInput' onKeyDown={(e) =>handleEvent(e,i)} defaultValue={props.data[i].list}></input></>}
                          <button onClick={() =>props.editData(i)} className='btn'>⌦</button>
                     </div>
                    </div>

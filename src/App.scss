@@ -341,7 +341,7 @@ li{
   top: 5px;
   width: 5px;
   height: 10px;
-  border: solid green;
+  border: solid #012b72;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -508,6 +508,7 @@ li{
   }
   .drop{
     height:70px;
+    width:15%;
     display: flex;
     justify-content: center;
     width:15%;
@@ -574,17 +575,34 @@ li{
   .border-bottom{
     border:1px solid gray;
   }
+  .rightArrowWrapper{
+    display: flex;
+    height:70px;
+    background-color: white;
+  }
   .rightArrow{
     display: flex;
     flex-direction: column;
-    height: 70px;
-    flex-basis: auto;
-    background-color: white;
-    font-size: 50px;
     justify-content: center;
-    color: #012b72;
-    padding-right: 20px;
+    color: white;
+    background-color: #012b72;
+    border: 1px solid #012b72;
+    border-radius: 50%;
+    height: fit-content;
+    align-self: center;
+    font-size: 25px;
+    padding-left: 6px;
+    padding-right: 4px;
+    padding-bottom: 2px;
+    margin-right: 15px;
   }
+  .dummyRightArrow{
+    display: flex;
+    height:70px;
+    background-color: white;
+    width:20%;
+  }
+  
   .deletelist{
     display: flex;
     width: 100%;
@@ -610,5 +628,16 @@ li{
     height:100%;
     width:100%;
     background-color: rgba(0,0,0,0.5);
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    overflow-x: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
   }
 }

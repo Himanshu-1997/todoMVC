@@ -221,7 +221,9 @@ function App() {
             {allMarked ? <button className='drop' onClick={() => handleAllCompleted()}>&#9745;</button>:<button className='drop' style={{color:'grey'}} onClick={() => handleAllCompleted()}>&#9745;</button>}
             <label className='hiddenLabel' for='todo'>Add todo</label>
             <input id='todo' autoComplete='off' type='text' onChange={handleInputChange} value={input} placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
-            <div className='rightArrow' onClick={handleAddInput}>&#8626;</div>
+            {input?<div className='rightArrowWrapper'>
+            <div className='rightArrow' onClick={handleAddInput}>&#x27A4;</div>
+            </div>:<div className='dummyRightArrow'></div>}
           </div>
           <div id='top' className='top'>
             <div id='content' className='content' onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd} onDrop={handleDrop}>
