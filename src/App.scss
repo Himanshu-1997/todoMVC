@@ -115,7 +115,9 @@ li{
   // border-bottom: 0.25px solid lightgrey;
 }
 
-
+.deletelist{
+  display: none;
+}
 .editInput{
   flex-grow: 1;
   height:15px;
