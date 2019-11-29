@@ -1,8 +1,8 @@
-import React, { useState,useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import DisplayTodolist from './displayTodolist';
 import DisplayActiveTodolist from './displayActiveTodolist';
 import DisplayCompletedTodolist from './displayCompletedTodolist';
-import Sidebar from './Sidebar';
+// import Sidebar from './Sidebar';
 import Support from './Support';
 import './App.scss';
 import './Sidebar.scss';
@@ -169,9 +169,9 @@ function App() {
       localStorage.setItem('todolist', JSON.stringify(data));
     }
   }
-  const handleMenuClick = (e) => {
-    setIsSideOpen(!isSideOpen);
-  }
+  // const handleMenuClick = (e) => {
+  //   setIsSideOpen(!isSideOpen);
+  // }
   const handleSidebarClick = () => {
     if (isSideOpen){
       setIsSideOpen(!isSideOpen);
@@ -179,10 +179,10 @@ function App() {
     if(isDel)
       setIsDel(!isDel);
   }
-  const handleToggleSidebar = (d) =>{
-    setIsSideOpen(d);
-    setIsHelp(true);
-  }
+  // const handleToggleSidebar = (d) =>{
+  //   setIsSideOpen(d);
+  //   setIsHelp(true);
+  // }
   const hideSupport = (d) =>{
     setIsHelp(d);
   }
@@ -196,6 +196,10 @@ function App() {
       d = [...todolist, { list: input, completed: false}];
       setTodolist(d);
       setInput('');
+      setTimeout(function(){
+        const { current : loc={} } = listRef;
+        loc.scrollTop = loc.scrollHeight;
+      },0);
     }
     localStorage.setItem('todolist', JSON.stringify(d)); 
   }
@@ -206,19 +210,23 @@ function App() {
       localStorage.setItem('todolist', JSON.stringify(todolist));
     }
   }
+  const handleHelp = () =>{
+    setIsHelp(!isHelp);
+  }
 
   return (
     <div className="App" onClick={handleSidebarClick}>
       <div ref={listRef} className='fullbody' style={isSideOpen || isHelp || isDel ?{opacity:0.2,overflow:'hidden',pointerEvents:"none"}:{opacity:1,overflow:'auto'}}>
         <div className='title'>
-          <div className='newMenu'>
+          {/* <div className='newMenu'>
             <div className='menu' onClick={handleMenuClick}>&#9776;</div>
-          </div>
+          </div> */}
           <div className='menu2'>todos</div>
+          <div className='help' onClick={handleHelp}>&#x3f;</div>
         </div>
         <div className='shadow'>
           <div className='header'>
-            {allMarked ? <button className='drop' onClick={() => handleAllCompleted()}>&#9745;</button>:<button className='drop' style={{color:'grey'}} onClick={() => handleAllCompleted()}>&#9745;</button>}
+            {allMarked && todolist.length>0 ? <button className='drop' onClick={() => handleAllCompleted()}>&#9745;</button>:<button className='drop' style={{color:'grey'}} onClick={() => handleAllCompleted()}>&#9745;</button>}
             <label className='hiddenLabel' for='todo'>Add todo</label>
             <input id='todo' autoComplete='off' type='text' onChange={handleInputChange} value={input} placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
             {input?<div className='rightArrowWrapper'>
@@ -254,7 +262,7 @@ function App() {
             }
           </div>
         </div> </div>
-      {!isSideOpen ? <div className='sidebar close' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={(d) => handleToggleSidebar(d)}/></div>: <div className='sidebar open' onClick={e => e.stopPropagation()}><div className='overlay' onClick={()=>setIsSideOpen(!isSideOpen)}></div><Sidebar  handleSidebar={(d) => handleToggleSidebar(d)}/></div>}
+      {/* {!isSideOpen ? <div className='sidebar close' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={(d) => handleToggleSidebar(d)}/></div>: <><div className='overlay' onClick={()=>setIsSideOpen(!isSideOpen)}></div><div className='sidebar open' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={(d) => handleToggleSidebar(d)}/></div></>} */}
       {isHelp?<div className='help-us'><Support handleSupport={(d) => hideSupport(d)}/></div>:null}
       {!isDel?<div className='deletelist close'><DeleteList setDeleteToggle={(x) =>handleDeleteData(x)}/></div>:<div className='deletelist open'><div className='overlay'></div><DeleteList setDeleteToggle={(x) =>handleDeleteData(x)}/></div>}
     </div>
