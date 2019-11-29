@@ -8,8 +8,8 @@ const DeleteList = (props) =>{
                 Do you really want to delete this item?
              </div>
              <div className='del-content'>
-                 <button value='false' style={{backgroundColor:"grey",border:'none',color:'white',width:'66px',height:'40px',fontSize:'20px',borderRadius:'10%',marginRight:'15px'}} onClick={() =>props.setDeleteToggle(false)}>no</button>
-                 <button value='true' style={{backgroundColor:"#012b72",border:'none',color:'white',width:'66px',height:'40px',fontSize:'20px',borderRadius:'10%'}} onClick={() =>props.setDeleteToggle(true)}>yes</button>
+                 <button value='false' style={{backgroundColor:"grey",border:'none',color:'white',width:'66px',height:'40px',fontSize:'20px',borderRadius:'10%',marginRight:'15px'}} onClick={() =>props.setDeleteToggle(false)}>No</button>
+                 <button value='true' style={{backgroundColor:"#012b72",border:'none',color:'white',width:'66px',height:'40px',fontSize:'20px',borderRadius:'10%'}} onClick={() =>props.setDeleteToggle(true)}>Yes</button>
              </div>
         </div>
     )

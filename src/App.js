@@ -38,10 +38,6 @@ function App() {
   const [input,setInput]=useState('');
   const [isDel,setIsDel]=useState(false);
   const [delID,setDelID]=useState(-1);
-  useEffect(() =>{
-    const { current : loc={} } = listRef;
-    loc.scrollTop = loc.scrollHeight;
-  },[todolist.length]);
   const handleEvent = (e) => {
     let d = todolist;
     if (e.keyCode === ENTER) {
@@ -50,6 +46,10 @@ function App() {
       setTodolist(d);
       e.target.value = '';
       setInput('');
+      setTimeout(function(){
+        const { current : loc={} } = listRef;
+        loc.scrollTop = loc.scrollHeight;
+      },0);
     }
     localStorage.setItem('todolist', JSON.stringify(d));
   }

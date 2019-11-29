@@ -168,6 +168,7 @@ li{
   display: flex;
   color:rgb(173, 168, 214);
   font-size:20px;
+  flex-shrink: 0;
 }
 .all-btn{
   background-color: Transparent;
@@ -257,8 +258,8 @@ li{
   flex: 1 0 0;
   padding: 14px 0;  
   word-break: break-all;
-  min-width: 270px;
-  max-width: 370px;
+  // min-width: 270px;
+  // max-width: 370px;
   text-align: left;
   font-size: 24px;
   margin-top: 0px;
@@ -353,7 +354,7 @@ li{
 
 
 .wrapper {
-  padding-right: 16px;
+  padding-right: 6px;
   display: flex;
   flex-grow: 1;
   align-items: center;
@@ -394,8 +395,8 @@ li{
     margin: 0px;
     margin-top:0px;
     margin-bottom: 0px;
-    min-width: 77%;
-    max-width: 77%;
+    // min-width: 77%;
+    // max-width: 77%;
     flex-grow: 1;
     font-size:20px;
   }
@@ -417,13 +418,14 @@ li{
     flex-direction: row;
     justify-content: flex-start;
     position:-webkit-sticky;
+    align-self: center;
     position: fixed;
     top:0;
     z-index: 5;
     background:#012b72;
     text-transform: uppercase;
     color: white;
-    font-size: 40px;
+    font-size:22px;
     letter-spacing: 5px;
     margin-top: 0;
   }
@@ -532,6 +534,7 @@ li{
     flex-direction: row;
     justify-content: center;
     flex-grow: 1;
+    align-self: center;
   }
   
   
