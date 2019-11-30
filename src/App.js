@@ -38,6 +38,20 @@ function App() {
   const [input,setInput]=useState('');
   const [isDel,setIsDel]=useState(false);
   const [delID,setDelID]=useState(-1);
+  const [winHeinght,setWinHeight] = useState(window.innerHeight);
+  
+  React.useEffect(()=>{
+    setWinHeight(window.innerHeight);
+    const func = (e) => {
+      if(e.target.innerHeight === winHeinght){
+        listRef.current.scrollTop = 0;
+      }
+    }
+    window.addEventListener('resize',func);
+    return () => {
+      window.removeEventListener('resize',func);
+    }
+  },[])
   const handleEvent = (e) => {
     let d = todolist;
     if (e.keyCode === ENTER) {
