@@ -127,7 +127,10 @@ li{
   flex-grow: 1;
   height:15px;
   padding: 15px 0;
-  &:focus + button.btn {
+  &.saveEdit{
+    display: flex;
+  }
+  &:focus ~ button.btn {
     display: none;
   }
   font-size: 24px;
@@ -171,7 +174,8 @@ li{
 
 .list .btn{
   display: flex;
-  color:rgb(173, 168, 214);
+  // color:rgb(173, 168, 214);
+  color:#c71d1d;
   font-size:20px;
   flex-shrink: 0;
 }
@@ -562,6 +566,9 @@ li{
   .editInput{
     max-width:85%;
     font-size: 20px;
+    &:focus + button.btn{
+      display: none;
+    }
   }
   .help-us{
     display: flex;
@@ -646,15 +653,17 @@ li{
     background-color: white;
     font-weight: 700;
   }
-}
-@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
-  html {
-    transform: rotate(-90deg);
-    transform-origin: left top;
-    width: 100vh;
-    overflow-x: hidden;
-    position: absolute;
-    top: 100%;
-    left: 0;
+  .saveEdit{
+    display: flex;
+    font-size:20px;
+    border:1px solid #012b72;
+    color:white;
+    background-color: #012b72;
+    border-radius: 50%;
+    margin-right: 2px;
+    padding-left:5px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+    margin-left:5px;
   }
 }

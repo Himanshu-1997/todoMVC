@@ -240,7 +240,7 @@ function App() {
         </div>
         <div className='shadow'>
           <div className='header'>
-            {allMarked && todolist.length>0 ? <button className='drop' onClick={() => handleAllCompleted()}>&#9745;</button>:<button className='drop' style={{color:'grey'}} onClick={() => handleAllCompleted()}>&#9745;</button>}
+            {allMarked && todolist.length>0 ? <button className='drop' onClick={() => handleAllCompleted()}>&#9745;</button>:<button className='drop' style={{color:'grey'}} onClick={() => handleAllCompleted()}>&#9744;</button>}
             <label className='hiddenLabel' for='todo'>Add todo</label>
             <input id='todo' autoComplete='off' type='text' onChange={handleInputChange} value={input} placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
             {input?<div className='rightArrowWrapper'>
