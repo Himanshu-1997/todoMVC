@@ -248,9 +248,9 @@ function App() {
     let icl = Incompletedlist.join('\n');
     let finalData;
     if(Completedlist.length===0)
-      finalData = `TODO LIST${'\n\n'}[ INCOMPLETED LIST ]${'\n\n'}${icl}`;
+      finalData = `TODO LIST${'\n\n'}${icl}`;
     else if(Completedlist.length>0)
-      finalData = `TODO LIST${'\n\n'}[ COMPLETED LIST ]${"\n\n"}${cl}${"\n\n"}[ INCOMPLETED LIST ]${'\n\n'}${icl}`; 
+      finalData = `TODO LIST${'\n\n'}${icl}${'\n\n'}COMPLETED LIST${"\n\n"}${cl}`; 
     
     if(navigator.share!==undefined){
       navigator.share({
