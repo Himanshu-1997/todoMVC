@@ -228,10 +228,34 @@ function App() {
     setIsHelp(!isHelp);
   }
   const handleShare = () =>{
+    let c=1;
+    let Completedlist = [];
+    let Incompletedlist = []; 
+    todolist.map((d) => {
+        if(d.completed===true){
+          Completedlist.push(`${String(c++)} .) ${String(d.list)} ${'\n'}`)
+        }
+        return null;
+        });
+    c=1;
+    todolist.map((d) => {
+      if(d.completed===false){
+        Incompletedlist.push(`${String(c++)} .) ${String(d.list)} ${'\n'}`)
+      }
+      return null;
+      });
+    let cl = Completedlist.join('\n');
+    let icl = Incompletedlist.join('\n');
+    let finalData;
+    if(Completedlist.length===0)
+      finalData = `TODO LIST${'\n\n'}[ INCOMPLETED LIST ]${'\n\n'}${icl}`;
+    else if(Completedlist.length>0)
+      finalData = `TODO LIST${'\n\n'}[ COMPLETED LIST ]${"\n\n"}${cl}${"\n\n"}[ INCOMPLETED LIST ]${'\n\n'}${icl}`; 
+    
     if(navigator.share!==undefined){
       navigator.share({
         title:'Todolist',
-        url:'https://himanshu-todomvc.netlify.com',
+        text:finalData,
       })
       .then(() => console.log('Successful share'))
       .catch((error) => console.log('Error sharing', error));
