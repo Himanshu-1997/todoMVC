@@ -82,6 +82,16 @@ function App() {
       setTodolist([...todolist]);
       localStorage.setItem('todolist', JSON.stringify(todolist));
     }
+    let cnt=0;
+    for(let i=0;i<todolist.length;i++){
+      if(todolist[i].completed===true){
+        cnt++;
+      }
+    }
+    if(cnt===todolist.length)
+      setAllMarked(1);
+    else
+      setAllMarked(0);
   }
   const handleDisplay = (d) => {
     setDisplay(d);
@@ -97,6 +107,7 @@ function App() {
     data = todolist.filter((d, i) => d.completed === false);
     setTodolist(data);
     localStorage.setItem('todolist', JSON.stringify(data));
+    setAllMarked(0);
   }
   const handleAllCompleted = () => {
     let data;
