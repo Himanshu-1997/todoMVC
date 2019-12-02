@@ -272,7 +272,7 @@ function App() {
             <div className='menu' onClick={handleMenuClick}>&#9776;</div>
           </div> */}
           <div className='menu2'>todos</div>
-          <img src='share.svg' alt='Share' className='share' onClick={handleShare}></img>
+          {todolist.length>0 && <img src='share.svg' alt='Share' className='share' onClick={handleShare}></img>}
           <div className='help' onClick={handleHelp}>&#x3f;</div>
         </div>
         <div className='shadow'>
