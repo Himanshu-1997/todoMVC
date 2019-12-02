@@ -279,14 +279,14 @@ function App() {
           <div className='header'>
             {allMarked && todolist.length>0 ? <button className='drop' onClick={() => handleAllCompleted()}>&#9745;</button>:<button className='drop' style={{color:'grey'}} onClick={() => handleAllCompleted()}>&#9744;</button>}
             <label className='hiddenLabel' for='todo'>Add todo</label>
-            <input id='todo' autoComplete='off' type='text' onChange={handleInputChange} value={input} placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
+            <input id='todo' autoComplete='off' type='text' onChange={handleInputChange} onDrop={(e)=>e.preventDefault()} value={input} placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
             {input?<div className='rightArrowWrapper'>
             <div className='rightArrow' onClick={handleAddInput}>&#x27A4;</div>
             </div>:<div className='dummyRightArrow'></div>}
           </div>
           <div id='top' className='top'>
             <div id='content' className='content' onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd} onDrop={handleDrop}>
-              <div id='inner' >
+              <div id='inner'>
                 {display === 0 && <DisplayTodolist data={todolist} editData={(d) => { handleClick(d) }} sendCount={(d) => { handleCheckbox(d) }} changeData={(d, id) => handleEditData(d, id)} />}
                 {display === 1 && <DisplayActiveTodolist data={todolist} editData={(d) => { handleClick(d) }} sendCount={(d) => { handleCheckbox(d) }} changeData={(d, id) => handleEditData(d, id)} />}
                 {display === 2 && <DisplayCompletedTodolist data={todolist} editData={(d) => { handleClick(d) }} sendCount={(d) => { handleCheckbox(d) }} changeData={(d, id) => handleEditData(d, id)} />}
