@@ -227,7 +227,19 @@ function App() {
   const handleHelp = () =>{
     setIsHelp(!isHelp);
   }
-
+  const handleShare = () =>{
+    if(navigator.share!==undefined){
+      navigator.share({
+        title:'Todolist',
+        url:'https://himanshu-todomvc.netlify.com',
+      })
+      .then(() => console.log('Successful share'))
+      .catch((error) => console.log('Error sharing', error));
+    }
+    else{
+      console.log('Your system doesnot support sharing files.');
+    }
+  }
   return (
     <div className="App" onClick={handleSidebarClick}>
       <div ref={listRef} className='fullbody' style={isSideOpen || isHelp || isDel ?{opacity:0.2,overflow:'hidden',pointerEvents:"none"}:{opacity:1,overflow:'auto'}}>
@@ -236,6 +248,7 @@ function App() {
             <div className='menu' onClick={handleMenuClick}>&#9776;</div>
           </div> */}
           <div className='menu2'>todos</div>
+          <img src='share.svg' alt='Share' className='share' onClick={handleShare}></img>
           <div className='help' onClick={handleHelp}>&#x3f;</div>
         </div>
         <div className='shadow'>
