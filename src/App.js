@@ -2,11 +2,15 @@ import React, { useState, useRef } from 'react';
 import DisplayTodolist from './displayTodolist';
 import DisplayActiveTodolist from './displayActiveTodolist';
 import DisplayCompletedTodolist from './displayCompletedTodolist';
-// import Sidebar from './Sidebar';
+import Sidebar from './Sidebar';
 import Support from './Support';
 import './App.scss';
 import './Sidebar.scss';
 import DeleteList from './DeleteList';
+import Title from './Title';
+import DisplayButton from './DisplayButton';
+import EditTitle from './EditTitle';
+import Header from './Header';
 
 let srce = '-1';
 let desti = '-1';
@@ -28,6 +32,7 @@ const FindChecked = (props) => {
 }
 
 let list = localStorage.getItem('todolist') ? JSON.parse(localStorage.getItem('todolist')) : [];
+let title = localStorage.getItem('title') ? JSON.parse(localStorage.getItem('title')) : '';
 function App() {
   const [todolist, setTodolist] = useState(list);
   const [display, setDisplay] = useState(0);
@@ -39,6 +44,9 @@ function App() {
   const [isDel,setIsDel]=useState(false);
   const [delID,setDelID]=useState(-1);
   const [winHeinght,setWinHeight] = useState(window.innerHeight);
+  const [fillTitle,setFillTitle]=useState(false);
+  const [titleArray,setTitleArray]=useState(title);
+  const [isEditTitle,setIsEditTitle]=useState(false);
   
   React.useEffect(()=>{
     setWinHeight(window.innerHeight);
@@ -194,9 +202,6 @@ function App() {
       localStorage.setItem('todolist', JSON.stringify(data));
     }
   }
-  // const handleMenuClick = (e) => {
-  //   setIsSideOpen(!isSideOpen);
-  // }
   const handleSidebarClick = () => {
     if (isSideOpen){
       setIsSideOpen(!isSideOpen);
@@ -204,10 +209,10 @@ function App() {
     if(isDel)
       setIsDel(!isDel);
   }
-  // const handleToggleSidebar = (d) =>{
-  //   setIsSideOpen(d);
-  //   setIsHelp(true);
-  // }
+  const handleToggleSidebar = (d) =>{
+    setIsSideOpen(d);
+    setIsHelp(true);
+  }
   const hideSupport = (d) =>{
     setIsHelp(d);
   }
@@ -235,72 +240,68 @@ function App() {
       localStorage.setItem('todolist', JSON.stringify(todolist));
     }
   }
-  const handleHelp = () =>{
-    setIsHelp(!isHelp);
+  const handleChangeTitle = (d) =>{
+    if(d.length>0){
+      setFillTitle(true);
+      setTitleArray(d);
+      localStorage.setItem('title', JSON.stringify(d));
+    }
   }
-  const handleShare = () =>{
-    let c=1;
-    let Completedlist = [];
-    let Incompletedlist = []; 
-    todolist.map((d) => {
-        if(d.completed===true){
-          Completedlist.push(`${String(c++)} .) ${String(d.list)} ${'\n'}`)
-        }
-        return null;
-        });
-    c=1;
-    todolist.map((d) => {
-      if(d.completed===false){
-        Incompletedlist.push(`${String(c++)} .) ${String(d.list)} ${'\n'}`)
-      }
-      return null;
-      });
-    let cl = Completedlist.join('\n');
-    let icl = Incompletedlist.join('\n');
-    let finalData;
-    if(Completedlist.length===0)
-      finalData = `TODO LIST${'\n\n'}${icl}`;
-    else if(Completedlist.length>0)
-      finalData = `TODO LIST${'\n\n'}${icl}${'\n\n'}COMPLETED LIST${"\n\n"}${cl}`; 
-    
-    if(navigator.share!==undefined){
-      navigator.share({
-        title:'Todolist',
-        text:finalData,
-      })
-      .then(() => console.log('Successful share'))
-      .catch((error) => console.log('Error sharing', error));
+  const handleEditTitle = (d) =>{
+    if(d.length>0){
+     setTitleArray(d);
+     setIsEditTitle(false);
+     localStorage.setItem('title', JSON.stringify(d));
     }
     else{
-      console.log('Your system doesnot support sharing files.');
+      setIsEditTitle(true);
     }
   }
   return (
     <div className="App" onClick={handleSidebarClick}>
-      <div ref={listRef} className='fullbody' style={isSideOpen || isHelp || isDel ?{opacity:0.2,overflow:'hidden',pointerEvents:"none"}:{opacity:1,overflow:'auto'}}>
-        <div className='title'>
-          {/* <div className='newMenu'>
-            <div className='menu' onClick={handleMenuClick}>&#9776;</div>
-          </div> */}
-          <div className='menu2'>todos</div>
-          {todolist.length>0 && <img src='share.svg' alt='Share' className='share' onClick={handleShare}></img>}
-          <div className='help' onClick={handleHelp}>&#x3f;</div>
+      <div ref={listRef} className='fullbody' style={isSideOpen || isHelp || isDel ?{overflow:'hidden',pointerEvents:"none"}:{overflow:'auto'}}>
+        <Header isHelp={isHelp} handleHelp={(d) => setIsHelp(d)} isSideOpen={isSideOpen} data={todolist} handleMenuClick={(d) => setIsSideOpen(d)}/>
+        <div className='headerWrapper'>
+        { fillTitle===false && todolist.length<1 ?
+         <div className='headerList'><Title changeTitle={handleChangeTitle}/></div>
+         :
+         !isEditTitle ?
+         <div className='setTitle'>
+            <div  className='titleName'>{titleArray}</div>
+            <div className='editTitle' onClick={() =>{setIsEditTitle(true)}}>&#10000;</div>
+         </div>:null
+        }
+        {
+          isEditTitle ? 
+          <div className='setTitle'><EditTitle data={titleArray} editedTitle={handleEditTitle}/></div>:
+          null
+        }
+        { fillTitle || todolist.length>0?
+            <div className='header'>
+              {allMarked && todolist.length>0 ? 
+                <button className='drop' onClick={handleAllCompleted}>&#9745;</button>
+                :
+                <button className='drop' style={{color:'grey'}} onClick={handleAllCompleted}>&#9744;</button>
+              }
+              <label className='hiddenLabel' for='todo'>Add todo</label>
+              <input id='todo' autoComplete='off' type='text' onChange={handleInputChange} onDrop={(e)=>e.preventDefault()} value={input} placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
+              {input?
+                <div className='rightArrowWrapper'>
+                  <div className='rightArrow' onClick={handleAddInput}>&#x27A4;</div>
+                </div>:
+                <div className='dummyRightArrow'></div>
+              }
+            </div>
+            :null
+          }
         </div>
         <div className='shadow'>
-          <div className='header'>
-            {allMarked && todolist.length>0 ? <button className='drop' onClick={() => handleAllCompleted()}>&#9745;</button>:<button className='drop' style={{color:'grey'}} onClick={() => handleAllCompleted()}>&#9744;</button>}
-            <label className='hiddenLabel' for='todo'>Add todo</label>
-            <input id='todo' autoComplete='off' type='text' onChange={handleInputChange} onDrop={(e)=>e.preventDefault()} value={input} placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
-            {input?<div className='rightArrowWrapper'>
-            <div className='rightArrow' onClick={handleAddInput}>&#x27A4;</div>
-            </div>:<div className='dummyRightArrow'></div>}
-          </div>
           <div id='top' className='top'>
             <div id='content' className='content' onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd} onDrop={handleDrop}>
               <div id='inner'>
-                {display === 0 && <DisplayTodolist data={todolist} editData={(d) => { handleClick(d) }} sendCount={(d) => { handleCheckbox(d) }} changeData={(d, id) => handleEditData(d, id)} />}
-                {display === 1 && <DisplayActiveTodolist data={todolist} editData={(d) => { handleClick(d) }} sendCount={(d) => { handleCheckbox(d) }} changeData={(d, id) => handleEditData(d, id)} />}
-                {display === 2 && <DisplayCompletedTodolist data={todolist} editData={(d) => { handleClick(d) }} sendCount={(d) => { handleCheckbox(d) }} changeData={(d, id) => handleEditData(d, id)} />}
+                {display === 0 && <DisplayTodolist data={todolist} editData={handleClick} sendCount={handleCheckbox} changeData={handleEditData} />}
+                {display === 1 && <DisplayActiveTodolist data={todolist} editData={handleClick} sendCount={handleCheckbox} changeData={handleEditData} />}
+                {display === 2 && <DisplayCompletedTodolist data={todolist} editData={handleClick} sendCount={handleCheckbox} changeData={handleEditData} />}
               </div>
             </div>
             {todolist.length > 0 &&
@@ -309,24 +310,21 @@ function App() {
                   <div className='ileft'>
                     <FindChecked data={todolist} />
                     <div className='btn-clrcomp'>
-                    {findNoofCompletedtodo() > 0 && <button className='clr-comp' onClick={() => handleClearCompleted()}>Clear completed</button>}
+                    {findNoofCompletedtodo() > 0 && <button className='clr-comp' onClick={handleClearCompleted}>Clear completed</button>}
                     </div>
                   </div>
                   <div className='border-bottom '>
                   </div>
-                  <div className='three-btn'>
-                      {display === 0 ? <button className='all-btn active' onClick={() => handleDisplay(0)}>All</button> : <button className='all-btn' onClick={() => handleDisplay(0)}>All</button>}
-                      {display === 1 ? <button className='active-btn active' onClick={() => handleDisplay(1)}>Active</button> : <button className='active-btn' onClick={() => handleDisplay(1)}>Active</button>}
-                      {display === 2 ? <button className='comp-btn active' onClick={() => handleDisplay(2)}>Completed</button> : <button className='comp-btn' onClick={() => handleDisplay(2)}>Completed</button>}
-                  </div>
+                  <DisplayButton display={display} handleDisplay={handleDisplay} />
                 </div>
               </div>
             }
           </div>
-        </div> </div>
-      {/* {!isSideOpen ? <div className='sidebar close' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={(d) => handleToggleSidebar(d)}/></div>: <><div className='overlay' onClick={()=>setIsSideOpen(!isSideOpen)}></div><div className='sidebar open' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={(d) => handleToggleSidebar(d)}/></div></>} */}
-      {isHelp?<div className='help-us'><Support handleSupport={(d) => hideSupport(d)}/></div>:null}
-      {!isDel?<div className='deletelist close'><DeleteList setDeleteToggle={(x) =>handleDeleteData(x)}/></div>:<div className='deletelist open'><div className='overlay'></div><DeleteList setDeleteToggle={(x) =>handleDeleteData(x)}/></div>}
+        </div> 
+      </div>
+      {!isSideOpen ? <div className='sidebar close' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={handleToggleSidebar}/></div>: <><div className='overlay' onClick={()=>setIsSideOpen(!isSideOpen)}></div><div className='sidebar open' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={handleToggleSidebar}/></div></>}
+      {isHelp?<div className='help-us'><Support handleSupport={hideSupport}/></div>:null}
+      {!isDel?<div className='deletelist close'><DeleteList setDeleteToggle={handleDeleteData}/></div>:<div className='deletelist open'><div className='overlay'></div><DeleteList setDeleteToggle={handleDeleteData}/></div>}
     </div>
   );
 }

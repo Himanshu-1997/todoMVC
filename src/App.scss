@@ -14,6 +14,9 @@ li{
 .share{
   display: none;
 }
+.editTitle{
+  display: none;
+}
 .top{
   display: flex;
   flex-direction: column;
@@ -120,7 +123,6 @@ li{
   display: flex;
   justify-content: center;
   transition: transform ease-in 200ms;
-  // border-bottom: 0.25px solid lightgrey;
 }
 
 .deletelist{
@@ -417,7 +419,7 @@ li{
   }
   .content{
     width: 100%;
-    margin-top: 118px;
+    margin-top: 165px;
     flex-direction: column;
     margin-bottom: 116px;
   }
@@ -442,11 +444,11 @@ li{
     width:100%;
   }
   .header{
-    position:-webkit-sticky;
-    position: fixed;
-    top:0px;
-    z-index: 5;
-    margin-top:48px;
+    // position:-webkit-sticky;
+    // // position: fixed;
+    // top:0px;
+    // z-index: 5;
+    // margin-top:95px;
   }
   .all-btn{
     font-size: 17px;
@@ -530,6 +532,7 @@ li{
   }
 
   .menu{
+    align-self: center;
     font-size: 30px;
     margin-top: 5px;
     margin-left: 5px;
@@ -552,8 +555,8 @@ li{
     height: 100%;
     position: fixed;
     top:0;
-    transition: left 1.3s ease;
-    z-index:5;
+    transition: left 0.3s ease;
+    z-index:10;
     &.close{
       left:-100%;
     }
@@ -635,11 +638,12 @@ li{
     }
   }
   .overlay{
+    z-index: 10;
     position: fixed;
     top:0;
     height:100%;
     width:100%;
-    transition: left 1.3s ease;
+    transition: left 0.3s ease;
     background-color: rgba(0,0,0,0.5);
   }
   .help{
@@ -671,11 +675,55 @@ li{
   }
   .share{
     display: flex;
-    // fill: red;
     background-color: #012b72;
     height: 30px;
     margin-right: 15px;
     align-self: center;
     width: 34px;
+  }
+  .headerList{
+    display: flex;
+    margin-top: 15px;
+    flex-direction: column;
+    z-index: 15;
+    height:48px;
+    font-size:22px;
+    background-color: white;
+  }
+  .setTitle{
+    display: flex;
+    flex-direction: row;
+    min-height:48px;
+    font-size:22px;
+    width:100%;
+    background-color: white;
+  }
+  .titleName{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 90%;
+    height:48px;
+    overflow: auto;
+    word-break: break-word;
+  }
+  .editTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height:30px;
+    width:30px;
+    flex-grow: 1;
+    height: 48px;
+    transform: rotate(180deg);
+  }
+  .headerWrapper{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index:5;
+    margin-top:48px;
+    width:100%;
   }
 }

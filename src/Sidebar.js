@@ -7,11 +7,11 @@ const Sidebar = (props) =>{
     return(
         <div className='sb-wrapper'>
             <div className='sb-header'>
-                Welcome to TodoApp!!
+                TODOS
             </div>
             <div className='sb-body'>
-                <div className='sb-content' onClick={()=>props.handleSidebar(false)}>
-                    How to use it. &#9432;</div>
+                {/* <div className='sb-content' onClick={()=>props.handleSidebar(false)}>
+                    How to use it. &#9432;</div> */}
                 <div className='sb-content'>
                 create new todolist &#8853;  </div>
             </div>

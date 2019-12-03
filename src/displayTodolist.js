@@ -51,6 +51,8 @@ const DisplayTodolist = (props) => {
         setIndex(-1);
         props.changeData(data,i);
     }
+
+    
     return(
       <div>
        {
