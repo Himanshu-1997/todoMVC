@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Share = (props) =>{
-    let todolist = props.data;
+    let todolist = props.data.filter((d)=>d.ID === props.index);
     const handleShare = () =>{
         let c=1;
         let Completedlist = [];
@@ -23,9 +23,9 @@ const Share = (props) =>{
         let icl = Incompletedlist.join('\n');
         let finalData;
         if(Completedlist.length===0)
-          finalData = `TODO LIST${'\n\n'}${icl}`;
+          finalData = `TITLE:-${props.title[props.index]}\n\nTODO LIST${'\n\n'}${icl}`;
         else if(Completedlist.length>0)
-          finalData = `TODO LIST${'\n\n'}${icl}${'\n\n'}COMPLETED LIST${"\n\n"}${cl}`; 
+          finalData = `TITLE:-${props.title[props.index]}\n\nTODO LIST${'\n\n'}${icl}${'\n\n'}COMPLETED LIST${"\n\n"}${cl}`; 
         
         if(navigator.share!==undefined){
           navigator.share({

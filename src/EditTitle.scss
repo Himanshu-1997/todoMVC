@@ -3,6 +3,7 @@
     flex-direction: row;
     width:100%;
     height:48px;
+    padding-left: 10px;
 }
 .et-titleList{
     // margin-top:10px;
@@ -16,6 +17,10 @@
     outline: none;
     height: 47px;
     font-size:22px;
+    background-color: gainsboro;
+    border-radius: 20px;
+    margin-right: 5px;
+    // margin-top:3px;
 }
 .et-titleSaveButton{
     display: flex;
@@ -28,8 +33,9 @@
     height:40px;
     font-size:15px;
     border-radius: 50%;
-    padding-left: 10px;
+    padding-left: 12px;
     padding-right: 8px;
+    padding-bottom: 2px;
     font-size:21px;
 }
 .et-btnWrapper{

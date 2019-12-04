@@ -689,6 +689,8 @@ li{
     height:48px;
     font-size:22px;
     background-color: white;
+    padding-left: 10px;
+    padding-right: 2px;
   }
   .setTitle{
     display: flex;
@@ -707,6 +709,10 @@ li{
     overflow: auto;
     font-size: 22px;
     word-break: break-word;
+    background-color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 5px;
   }
   .editTitle{
     display: flex;

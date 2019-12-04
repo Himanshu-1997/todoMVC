@@ -300,7 +300,7 @@ function App() {
   return (
     <div className="App" onClick={handleSidebarClick}>
       <div ref={listRef} className='fullbody' style={isSideOpen || isHelp || isDel ?{overflow:'hidden',pointerEvents:"none"}:{overflow:'auto'}}>
-        <Header isHelp={isHelp} handleHelp={(d) => setIsHelp(d)} isSideOpen={isSideOpen} data={todolist} handleMenuClick={(d) => setIsSideOpen(d)}/>
+        <Header isHelp={isHelp} handleHelp={(d) => setIsHelp(d)} isSideOpen={isSideOpen} data={todolist} index={Id} title={titleArray} handleMenuClick={(d) => setIsSideOpen(d)}/>
         <div className='headerWrapper'>
         { fillTitle===false ?
          <div className='headerList'><Title changeTitle={handleChangeTitle}/></div>

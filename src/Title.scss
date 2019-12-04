@@ -13,6 +13,9 @@
     height: 48px;
     font-size:22px;
     padding-left: 5px;
+    background-color: gainsboro;
+    margin-right: 5px;
+    border-radius:35px;
 }
 .titleSaveButton{
     display: flex;
@@ -26,7 +29,8 @@
     font-size:22px;
     border-radius: 50%;
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 8px;
+    padding-bottom: 5px;
 }
 .titlebtnWrapper{
     display: flex;

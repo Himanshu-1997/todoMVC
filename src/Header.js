@@ -9,7 +9,7 @@ const Header = (props) =>{
                 <div className='menu' onClick={() =>{props.handleMenuClick(!props.isSideOpen)}}>&#9776;</div>
              </div>
              <div className='menu2'>todos</div>
-             {props.data.length>0 && <Share data={props.data}/>}
+             {props.data.length>0 && <Share index={props.index} title={props.title} data={props.data}/>}
              <div className='help' onClick={() => props.handleHelp(!props.IsHelp)}>&#x3f;</div>
         </div>
     )

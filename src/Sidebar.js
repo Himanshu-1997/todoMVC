@@ -23,8 +23,12 @@ const Sidebar = (props) =>{
                     How to use it. &#9432;</div> */}
                 <div className='sb-content' onClick={handleclickEvent}>
                 create new todolist</div>
-                <div className='sb-content' onClick={handleClick}> List of Todos<span className='downArrow'>&#9661;</span></div>
-                {showTitleList && <ListOfTitle showTodoWithId={props.showTodoWithId} title={props.title}/>}
+                {!showTitleList ? <div className='sb-content' onClick={handleClick}>List of Todos<span className='downArrow'>&#9661;</span></div>:
+                    <div className='sb-content' onClick={handleClick}>List of Todos<span className='downArrow'>&#9651;</span></div>
+                }
+                <div className='listItems'>
+                    {showTitleList && <ListOfTitle showTodoWithId={props.showTodoWithId} title={props.title}/>}
+                </div>
             </div>
             <div className='sb-footer'>
                     &#169; Himanshu Kumar, 2019
