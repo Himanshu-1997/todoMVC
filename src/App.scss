@@ -705,6 +705,7 @@ li{
     flex-basis: 90%;
     height:48px;
     overflow: auto;
+    font-size: 22px;
     word-break: break-word;
   }
   .editTitle{
@@ -725,5 +726,6 @@ li{
     z-index:5;
     margin-top:48px;
     width:100%;
+    background-color: white;
   }
 }

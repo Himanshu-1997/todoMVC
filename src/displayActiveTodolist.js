@@ -57,7 +57,7 @@ const DisplayActiveTodolist = (props) => {
       <div>
        {
            props.data.map((d,i) => {
-               if(d.completed===false)
+               if(d.completed===false && d.ID===props.index)
                return (
                    <div className='body' id={i} draggable onDragStart={handleDragStart} onDragLeave={handleDragLeave} onDragOver={handleDragOver} onDrop={handleDrop}>
                    <div className='list'>

@@ -18,25 +18,29 @@ let check = false;
 let rItem = {};
 const ENTER = 13;
 const FindChecked = (props) => {
+  let data = props.data.filter((d) => d.ID===props.index);
   let c = 0;
-  for (let i = 0; i < props.data.length; i++) {
-    if (props.data[i].completed === true) {
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].completed === true) {
       c++;
     }
   }
   return (
     <div className='noItemsLeft'>
-      {props.data.length - c > 1 ? <p>{props.data.length - c} items left</p> : <p>{props.data.length - c} item left</p>}
+      {data.length - c > 1 ? <p>{data.length - c} items left</p> : <p>{data.length - c} item left</p>}
     </div>
   );
 }
 
 let list = localStorage.getItem('todolist') ? JSON.parse(localStorage.getItem('todolist')) : [];
 let title = localStorage.getItem('title') ? JSON.parse(localStorage.getItem('title')) : '';
+let allChecked = localStorage.getItem('allChecked') ? JSON.parse(localStorage.getItem('allChecked')) : 0;
+let titleLists = localStorage.getItem('titleLists') ? JSON.parse(localStorage.getItem('titleLists')) : [];
+let ID = localStorage.getItem('ID') ? JSON.parse(localStorage.getItem('ID')) : 0;
 function App() {
   const [todolist, setTodolist] = useState(list);
   const [display, setDisplay] = useState(0);
-  const [allMarked, setAllMarked] = useState(0);
+  const [allMarked, setAllMarked] = useState(allChecked);
   const listRef = useRef();
   const [isSideOpen, setIsSideOpen] = useState(false);
   const [isHelp,setIsHelp]=useState(false);
@@ -44,12 +48,22 @@ function App() {
   const [isDel,setIsDel]=useState(false);
   const [delID,setDelID]=useState(-1);
   const [winHeinght,setWinHeight] = useState(window.innerHeight);
-  const [fillTitle,setFillTitle]=useState(false);
-  const [titleArray,setTitleArray]=useState(title);
+  const [titleTable,setTitleTable]=useState(title);
+  const [fillTitle,setFillTitle]=useState(title!==''?true:false);
   const [isEditTitle,setIsEditTitle]=useState(false);
+  const [titleArray,setTitleArray]=useState(titleLists);
+  const [Id,setId]=useState(ID);
   
   React.useEffect(()=>{
     setWinHeight(window.innerHeight);
+    localStorage.setItem('ID',JSON.stringify(Id));
+    let data = todolist.filter((d) => d.ID===Id);
+    let data1 = data.filter(d => d.completed===true);
+    if(data.length===data1.length && data.length>0)
+        setAllMarked(1);
+    else{
+      setAllMarked(0);
+    }
     const func = (e) => {
       if(e.target.innerHeight === winHeinght){
         listRef.current.scrollTop = 0;
@@ -59,12 +73,12 @@ function App() {
     return () => {
       window.removeEventListener('resize',func);
     }
-  },[])
+  },[Id])
   const handleEvent = (e) => {
     let d = todolist;
     if (e.keyCode === ENTER) {
       if (e.target.value !== '' && e.target.value.trim().length>0)
-        d = [...todolist, { list: e.target.value, completed: false}];
+        d = [...todolist, { list: e.target.value, completed: false, ID:Id}];
       setTodolist(d);
       e.target.value = '';
       setInput('');
@@ -80,7 +94,7 @@ function App() {
     setDelID(d);
   }
   const handleCheckbox = (d) => {
-    if (todolist[d].completed === true) {
+    if (todolist[d].completed === true && todolist[d].ID===Id) {
       todolist[d].completed = false;
       setTodolist([...todolist]);
       localStorage.setItem('todolist', JSON.stringify(todolist));
@@ -91,15 +105,20 @@ function App() {
       localStorage.setItem('todolist', JSON.stringify(todolist));
     }
     let cnt=0;
-    for(let i=0;i<todolist.length;i++){
-      if(todolist[i].completed===true){
+    let data = todolist.filter((d) =>d.ID===Id);
+    for(let i=0;i<data.length;i++){
+      if(data[i].completed===true){
         cnt++;
       }
     }
-    if(cnt===todolist.length)
+    if(cnt===data.length){
       setAllMarked(1);
-    else
+      localStorage.setItem('allChecked', JSON.stringify(1));
+    }
+    else{
       setAllMarked(0);
+      localStorage.setItem('allChecked', JSON.stringify(0));
+    }
   }
   const handleDisplay = (d) => {
     setDisplay(d);
@@ -111,29 +130,31 @@ function App() {
     localStorage.setItem('todolist', JSON.stringify(todolist));
   }
   const handleClearCompleted = () => {
-    let data;
-    data = todolist.filter((d, i) => d.completed === false);
+    let data = todolist.filter((d, i) => (d.completed===true && d.ID===Id)?false:true);
     setTodolist(data);
     localStorage.setItem('todolist', JSON.stringify(data));
     setAllMarked(0);
+    localStorage.setItem('allChecked', JSON.stringify(0));
   }
   const handleAllCompleted = () => {
     let data;
     if (allMarked === 0) {
       data = todolist.map((d, i) => {
-        if (d.completed === false)
+        if (d.completed === false && d.ID===Id)
           d.completed = true;
         return d;
       });
       setAllMarked(1);
+      localStorage.setItem('allChecked', JSON.stringify(1));
     }
     else {
       data = todolist.map((d, i) => {
-        if (d.completed === true)
+        if (d.completed === true && d.ID===Id)
           d.completed = false;
         return d;
       });
       setAllMarked(0);
+      localStorage.setItem('allChecked', JSON.stringify(0));
     }
     setTodolist(data);
     localStorage.setItem('todolist', JSON.stringify(todolist));
@@ -142,7 +163,7 @@ function App() {
   const findNoofCompletedtodo = () => {
     let d = 0;
     for (let i = 0; i < todolist.length; i++) {
-      if (todolist[i].completed === true) {
+      if (todolist[i].completed === true && todolist[i].ID===Id) {
         d += 1;
       }
     }
@@ -211,7 +232,6 @@ function App() {
   }
   const handleToggleSidebar = (d) =>{
     setIsSideOpen(d);
-    setIsHelp(true);
   }
   const hideSupport = (d) =>{
     setIsHelp(d);
@@ -223,7 +243,7 @@ function App() {
     e.preventDefault();
     let d = todolist;
     if(input!=='' && input.trim().length>0){
-      d = [...todolist, { list: input, completed: false}];
+      d = [...todolist, { list: input, completed: false,ID:Id}];
       setTodolist(d);
       setInput('');
       setTimeout(function(){
@@ -243,42 +263,62 @@ function App() {
   const handleChangeTitle = (d) =>{
     if(d.length>0){
       setFillTitle(true);
-      setTitleArray(d);
+      setTitleTable(d);
+      let lists = [...titleArray,d];
+      setTitleArray(lists);
       localStorage.setItem('title', JSON.stringify(d));
+      localStorage.setItem('titleLists',JSON.stringify(lists));
     }
   }
   const handleEditTitle = (d) =>{
     if(d.length>0){
-     setTitleArray(d);
+     setTitleTable(d);
      setIsEditTitle(false);
      localStorage.setItem('title', JSON.stringify(d));
+     let lists=titleArray;
+     lists[Id]=d;
+     setTitleArray(lists);
+     localStorage.setItem('titleLists',JSON.stringify(lists));
     }
     else{
       setIsEditTitle(true);
     }
+  }
+  const handleSetID = () =>{
+    let d = titleArray.length;
+    setId(d);
+    localStorage.setItem('ID',JSON.stringify(d));
+    setFillTitle(false);
+  }
+  const showTodoWithId = (d) =>{
+    setIsSideOpen(false);
+    setId(d);
+    setTitleTable(titleArray[d]);
+    localStorage.setItem('title',JSON.stringify(titleArray[d]));
+    localStorage.setItem('ID',JSON.stringify(d));
   }
   return (
     <div className="App" onClick={handleSidebarClick}>
       <div ref={listRef} className='fullbody' style={isSideOpen || isHelp || isDel ?{overflow:'hidden',pointerEvents:"none"}:{overflow:'auto'}}>
         <Header isHelp={isHelp} handleHelp={(d) => setIsHelp(d)} isSideOpen={isSideOpen} data={todolist} handleMenuClick={(d) => setIsSideOpen(d)}/>
         <div className='headerWrapper'>
-        { fillTitle===false && todolist.length<1 ?
+        { fillTitle===false ?
          <div className='headerList'><Title changeTitle={handleChangeTitle}/></div>
          :
          !isEditTitle ?
          <div className='setTitle'>
-            <div  className='titleName'>{titleArray}</div>
+            <div  className='titleName'>{titleTable}</div>
             <div className='editTitle' onClick={() =>{setIsEditTitle(true)}}>&#10000;</div>
          </div>:null
         }
         {
           isEditTitle ? 
-          <div className='setTitle'><EditTitle data={titleArray} editedTitle={handleEditTitle}/></div>:
+          <div className='setTitle'><EditTitle data={titleTable} editedTitle={handleEditTitle}/></div>:
           null
         }
-        { fillTitle || todolist.length>0?
+        { fillTitle ?
             <div className='header'>
-              {allMarked && todolist.length>0 ? 
+              {allMarked ? 
                 <button className='drop' onClick={handleAllCompleted}>&#9745;</button>
                 :
                 <button className='drop' style={{color:'grey'}} onClick={handleAllCompleted}>&#9744;</button>
@@ -299,16 +339,16 @@ function App() {
           <div id='top' className='top'>
             <div id='content' className='content' onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd} onDrop={handleDrop}>
               <div id='inner'>
-                {display === 0 && <DisplayTodolist data={todolist} editData={handleClick} sendCount={handleCheckbox} changeData={handleEditData} />}
-                {display === 1 && <DisplayActiveTodolist data={todolist} editData={handleClick} sendCount={handleCheckbox} changeData={handleEditData} />}
-                {display === 2 && <DisplayCompletedTodolist data={todolist} editData={handleClick} sendCount={handleCheckbox} changeData={handleEditData} />}
+                {display === 0 && <DisplayTodolist index={Id} data={todolist} editData={handleClick} sendCount={handleCheckbox} changeData={handleEditData} />}
+                {display === 1 && <DisplayActiveTodolist index={Id} data={todolist} editData={handleClick} sendCount={handleCheckbox} changeData={handleEditData} />}
+                {display === 2 && <DisplayCompletedTodolist index={Id} data={todolist} editData={handleClick} sendCount={handleCheckbox} changeData={handleEditData} />}
               </div>
             </div>
             {todolist.length > 0 &&
               <div className='footer'>
                 <div className='btns'>
                   <div className='ileft'>
-                    <FindChecked data={todolist} />
+                    <FindChecked data={todolist} index={Id}/>
                     <div className='btn-clrcomp'>
                     {findNoofCompletedtodo() > 0 && <button className='clr-comp' onClick={handleClearCompleted}>Clear completed</button>}
                     </div>
@@ -322,7 +362,7 @@ function App() {
           </div>
         </div> 
       </div>
-      {!isSideOpen ? <div className='sidebar close' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={handleToggleSidebar}/></div>: <><div className='overlay' onClick={()=>setIsSideOpen(!isSideOpen)}></div><div className='sidebar open' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={handleToggleSidebar}/></div></>}
+      {!isSideOpen ? <div className='sidebar close' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={handleToggleSidebar}/></div>: <><div className='overlay' onClick={()=>setIsSideOpen(!isSideOpen)}></div><div className='sidebar open' onClick={e => e.stopPropagation()}><Sidebar handleSetID={handleSetID} title={titleArray} showTodoWithId={showTodoWithId} handleSidebar={handleToggleSidebar}/></div></>}
       {isHelp?<div className='help-us'><Support handleSupport={hideSupport}/></div>:null}
       {!isDel?<div className='deletelist close'><DeleteList setDeleteToggle={handleDeleteData}/></div>:<div className='deletelist open'><div className='overlay'></div><DeleteList setDeleteToggle={handleDeleteData}/></div>}
     </div>

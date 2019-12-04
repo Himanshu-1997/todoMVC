@@ -57,6 +57,7 @@ const DisplayTodolist = (props) => {
       <div>
        {
            props.data.map((d,i) => {
+            if(d.ID===props.index)
                return (
                    <div key={i} className='body' id={i} draggable onDragStart={handleDragStart} onDragLeave={handleDragLeave} onDragOver={handleDragOver} onDrop={handleDrop}>
                    <div className='list'>
@@ -91,6 +92,9 @@ const DisplayTodolist = (props) => {
                    </div>
                    </div>
                )
+            else{
+                return null;
+            }
            })
        }
       </div>
