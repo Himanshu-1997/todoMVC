@@ -1,4 +1,16 @@
 .listOfTitle{
     display: flex;
     flex-direction: column;
+    // max-width: 100%;
+    word-break: break-all;
+    word-break: break-word;
+}
+.listItem{
+    display: flex;
+    background-color: gainsboro;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    // max-width: 100%;
+    word-break: break-all;
+    word-break: break-word;
 }

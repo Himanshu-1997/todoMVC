@@ -6,7 +6,7 @@ const ListOfTitle = (props) =>{
         <div className='listOfTitle'>
            {
                props.title.map((d,i) =>{
-                   return <li onClick={() =>props.showTodoWithId(i)}>{d}</li>
+                   return <div className='listItem'><li onClick={() =>{props.handleFillTitle();props.showTodoWithId(i)}}>{d}</li></div>
                })
            }
         </div>

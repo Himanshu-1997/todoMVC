@@ -27,7 +27,7 @@ const Sidebar = (props) =>{
                     <div className='sb-content' onClick={handleClick}>List of Todos<span className='downArrow'>&#9651;</span></div>
                 }
                 <div className='listItems'>
-                    {showTitleList && <ListOfTitle showTodoWithId={props.showTodoWithId} title={props.title}/>}
+                    {showTitleList && <ListOfTitle handleFillTitle={() => props.handleFillTitle()} showTodoWithId={props.showTodoWithId} title={props.title}/>}
                 </div>
             </div>
             <div className='sb-footer'>

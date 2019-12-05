@@ -362,7 +362,7 @@ function App() {
           </div>
         </div> 
       </div>
-      {!isSideOpen ? <div className='sidebar close' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={handleToggleSidebar}/></div>: <><div className='overlay' onClick={()=>setIsSideOpen(!isSideOpen)}></div><div className='sidebar open' onClick={e => e.stopPropagation()}><Sidebar handleSetID={handleSetID} title={titleArray} showTodoWithId={showTodoWithId} handleSidebar={handleToggleSidebar}/></div></>}
+      {!isSideOpen ? <div className='sidebar close' onClick={e => e.stopPropagation()}><Sidebar  handleSidebar={handleToggleSidebar}/></div>: <><div className='overlay' onClick={()=>setIsSideOpen(!isSideOpen)}></div><div className='sidebar open' onClick={e => e.stopPropagation()}><Sidebar handleSetID={handleSetID} handleFillTitle={() =>setFillTitle(true)} title={titleArray} showTodoWithId={showTodoWithId} handleSidebar={handleToggleSidebar}/></div></>}
       {isHelp?<div className='help-us'><Support handleSupport={hideSupport}/></div>:null}
       {!isDel?<div className='deletelist close'><DeleteList setDeleteToggle={handleDeleteData}/></div>:<div className='deletelist open'><div className='overlay'></div><DeleteList setDeleteToggle={handleDeleteData}/></div>}
     </div>
