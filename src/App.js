@@ -42,6 +42,7 @@ function App() {
   const [display, setDisplay] = useState(0);
   const [allMarked, setAllMarked] = useState(allChecked);
   const listRef = useRef();
+  const inputRef = useRef();
   const [isSideOpen, setIsSideOpen] = useState(false);
   const [isHelp,setIsHelp]=useState(false);
   const [input,setInput]=useState('');
@@ -240,6 +241,7 @@ function App() {
     setInput(e.target.value);
   }
   const handleAddInput = (e) =>{
+    inputRef.current.focus();
     e.preventDefault();
     let d = todolist;
     if(input!=='' && input.trim().length>0){
@@ -324,7 +326,7 @@ function App() {
                 <button className='drop' style={{color:'grey'}} onClick={handleAllCompleted}>&#9744;</button>
               }
               <label className='hiddenLabel' for='todo'>Add todo</label>
-              <input id='todo' autoComplete='off' type='text' onChange={handleInputChange} onDrop={(e)=>e.preventDefault()} value={input} placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
+              <input id='todo' autoComplete='off' type='text' onChange={handleInputChange} onDrop={(e)=>e.preventDefault()} value={input} ref={inputRef} placeholder='What needs to be done?' onKeyDown={handleEvent}></input>
               {input?
                 <div className='rightArrowWrapper'>
                   <div className='rightArrow' onClick={handleAddInput}>&#x27A4;</div>
