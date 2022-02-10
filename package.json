@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://Himanshu-1997.github.io",
   "dependencies": {
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0"
